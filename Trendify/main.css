@@ -1,0 +1,28 @@
+html {
+    font-size: 62.5%;
+} 
+
+* {
+    box-sizing: border-box;
+} 
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.first-section {
+    display: flex;
+    justify-content: center;
+    background-color: #1E1E1E;
+}
+
+.nav-list {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    color: white;
+    list-style: none;
+    display: flex;
+    font-family: Konkhmer Sleokchher;      
+    gap: 3.5%;
+}
