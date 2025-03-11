@@ -4,6 +4,7 @@ html {
 
 * {
     box-sizing: border-box;
+    font-size: 1.6rem;
 } 
 
 body {
@@ -13,16 +14,60 @@ body {
 
 .first-section {
     display: flex;
+    flex-flow: row nowrap;
     justify-content: center;
     background-color: #1E1E1E;
 }
 
-.nav-list {
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    color: white;
-    list-style: none;
+.nav-main {
     display: flex;
-    font-family: Konkhmer Sleokchher;      
+    align-items: center;
+    justify-content: space-around;
+    width: 100vw;
+} 
+
+.img-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.img-logo{
+    width: 7.5%;
+}   
+
+.nav-list {
+    display: flex;
+    justify-content: center;
+    width: 45rem;
+    list-style: none;
+    font-family: Konkhmer Sleokchher;  
+    text-transform: uppercase;
+    color: white;    
     gap: 5%;
 }
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    background-color: #181817;
+    border-radius: 25px;
+    width: 20%;
+    height: 3rem;
+}
+
+.search-bar input{
+    color: white;
+    border-radius: 25px;
+    background-color: #181817;
+    width: 70%;
+    outline: none;
+    border: none;
+}
+
+.search-bar button {
+    color: white;
+    background-color: #181817;
+    outline: none;
+    border: none;
+}
+
