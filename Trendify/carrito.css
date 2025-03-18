@@ -1,0 +1,119 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+}
+
+header {
+    background-color: #1E1E1E;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    display: flex;
+}
+
+nav ul li {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+}
+
+
+main {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+}
+
+.carrito {
+    width: 60%;
+}
+
+.producto {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+}
+
+.producto img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.producto-info {
+    flex: 1;
+    padding: 0 15px;
+}
+
+.precio {
+    font-weight: bold;
+}
+
+.suma {
+    width: 25%;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.pagar {
+    width: 100%;
+    background: black;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.detalles-total p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.descuento {
+    color: red;
+}
+
+.total {
+    font-weight: bold;
+}
+
+.ahorro {
+    color: red;
+}
