@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Registro</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='styles.css'>
+    <link rel="icon" type="image/png" href="img/isotipo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src='script.js'></script>
+</head>
+<body>
 
+    <div class="top-bar">
+        <a href="#">Ayuda</a>
+        <a href="#">Pedidos y devoluciones</a>
+        <a href="#">Únete al club</a>
+    </div>
+    
+<header>
+    <div class="logo">
+        <img src="img/logo.png" alt="logo">
+    </div>             
+    <nav>
+        <ul>
+            <li href="#">OFERTAS</li>
+            <li href="#">MUJER</li>
+            <li href="#">HOMBRE</li>
+            <li href="#">LO NUEVO</li>
+        </ul>
+    </nav>
+    <div class="icons">
+        <div class="search-box">
+            <input type="text" placeholder="Buscar">
+            <i class="fas fa-search"></i>
+        </div>
+        <i class="fas fa-shopping-cart"></i>
+        <i class="fas fa-user"></i>
+    </div>
+</header>
+
+<div class="login-container">
+    <div class="login-form">
+        <h2>INGRESA TUS DATOS</h2>
+        <form action="#" method="POST">
+            <input type="email" id="email" name="email" placeholder="E-MAIL" required>
+            <input type="nombre" id="nombre" name="nombre" placeholder="NOMBRE" required>
+            <input type="apellidos" id="apellidos" name="apellidos" placeholder="APELLIDOS">
+            <input type="password" id="password" name="password" placeholder="CONTRASEÑA">
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="CONFIRMAR CONTRASEÑA">
+
+            <div class="checkbox-container">
+                <label>
+                    <input type="checkbox" id="terms" name="terms" required> Acepto los términos y condiciones
+                </label>
+            </div>
+
+            <button class="signup-button">REGISTRARSE</button>
+        </form>
+    </div>
+    <div class="signup-image">
+        <img src="img/signup-portada.jpg" alt="Imagen de fondo">
+    </div>
+</div>
+
+</body>
+</html>
