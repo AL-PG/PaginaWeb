@@ -1,40 +1,52 @@
 html {
     font-size: 62.5%;
+    font-family: Montserrat;
 } 
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
 
 * {
     box-sizing: border-box;
     font-size: 1.6rem;
 } 
 
-body {
-    margin: 0;
-    padding: 0;
-}
-
 .first-section {
-    justify-content: center;
+    width: 100%;
+    height: 100%;
     background-color: #1E1E1E;
 }
 
 .top-bar {
+    width: 100%;
     background-color: #D99D6C;
 }
 
 .top-bar-list {
     margin: 0;
-    padding: 0;
+    padding: 0% 5%;
+    height: 2vh;
+    width: 100%;
     list-style: none;
     display: flex;
     justify-content: flex-end;
     gap: 2%;
 }
 
+.top-bar-list li {
+    font-size: 1.2rem
+}
+
 .nav-main {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 100vw;
+    width: 100%;
+    height: 10vh;
 } 
 
 .nav-left {
@@ -71,7 +83,6 @@ body {
     background-color: #181817;
     border-radius: 25px;
     width: 70%;
-    height: 3.5rem;
 }
 
 .search-bar input{
@@ -91,36 +102,84 @@ body {
 }
 
 .principal{
-    padding-top: 2.5rem;
     background-color: #1E1E1E;
     width: 100%;
     max-width: 1440px;
     justify-items: center;
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
   }
 
-  .titulo{
+.blur-effect {
+    position: absolute;
+    top: 50vh;
+    left: 35vw;
+    width: 300px; 
+    height: 300px; 
+    border-radius: 50%; 
+    background-color: #FFFFFF;
+    filter: blur(30rem)
+}
+
+.main-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.titulo{
     font-family: "Domine";
-    letter-spacing: 32px;
+    letter-spacing: 4vw;
     color: #FFFFFF;
     text-align: center;
-    font-size: 14vw;
+    font-size: 8vw;
     margin: 0;
      
   }
 
+.info-img {
+    margin: 30% 10%; 
+    color: white;
+}
 
-  .img-portada {
-    z-index: -9999;
+.info-img p {
+    font-size: 1.2rem;
+}
+
+.info-img h2 {
+    font-family: "Domine";
+    font-size: 4.5rem;
+    margin: 0;
+}
+
+.info-img h2:nth-of-type(2) {
+    color: black;
+    text-shadow: 
+        -1px -1px 0 white,  
+         1px -1px 0 white,  
+        -1px  1px 0 white,  
+         1px  1px 0 white;  
+    justify-self: center;
+}
+
+.info-img button{
+    border-radius: 28px;
+    color: black;
+    background-color: #D99D6C;
+    height: 3.2rem;
+    width: 16rem;
+    border: none;
+}
+
+.img-portada {
     top: 0%;
-    width: 60vw;
-    height: 80vw;
-    transform: translateY(-20%);
+    width: 40vw;
+    height: 40vw;
+    transform: translateY(-15%);
     object-fit: contain;
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0));
-  }
+}
   
-  @media (min-width: 1440px) {
+@media (min-width: 1440px) {
     .titulo{
         font-size: 10vw;
     }
@@ -128,9 +187,9 @@ body {
         width: 50vw;
         height: 70vw;
     }
-  }
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .titulo{
         font-size: 7.5vw;
         padding-left: 30px;
@@ -141,3 +200,24 @@ body {
         transform: translateY(-10%);
     }
   }
+
+.div-imagen-main {
+    align-self: center;
+    justify-self: end;
+    margin: 25%;
+    text-align: center;
+}
+
+.div-imagen-main div {
+    border: 2px white dotted;
+    border-radius: 80px;
+}
+
+.div-imagen-main img {
+    width: 70%;
+}
+
+.div-imagen-main span {
+    color: white;
+    font-size: 1.2rem;
+}
