@@ -6,8 +6,10 @@ html {
 html, body {
     margin: 0;
     padding: 0;
+    width: 100vw;
     height: 100%;
-    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 * {
@@ -15,9 +17,12 @@ html, body {
     font-size: 1.6rem;
 } 
 
+.first-header {
+    background-color: #1E1E1E;
+}
+
 .first-section {
     width: 100%;
-    height: 100%;
     background-color: #1E1E1E;
 }
 
@@ -146,7 +151,7 @@ html, body {
 }
 
 .info-img h2 {
-    font-family: "Domine";
+    font-family: "Times New Roman";
     font-size: 4.5rem;
     margin: 0;
 }
@@ -181,11 +186,11 @@ html, body {
   
 @media (min-width: 1440px) {
     .titulo{
-        font-size: 10vw;
+        font-size: 8vw;
     }
     .img-portada {
         width: 50vw;
-        height: 70vw;
+        height: 40vw;
     }
 }
 
@@ -220,4 +225,234 @@ html, body {
 .div-imagen-main span {
     color: white;
     font-size: 1.2rem;
+}
+
+.carrusel-main-uno {
+    text-align: center;
+    background-color: #FFFFFF;
+    width: 100vw;   
+    height: auto;
+    max-width: 100%;
+}
+
+.carrusel-main-uno h1{
+    text-transform: uppercase;
+    font-size: 2.8rem;
+    font-weight: 800;   
+}
+
+.carrusel-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 5%;
+}
+
+.carrusel-img-central{
+    border-radius: 28px;
+    width: 100%;
+}
+
+.carrusel-img-central img{
+    border-radius: 28px;
+    width: 100%;
+    height: 100%;
+}
+
+.carrusel-img-lado img {
+    width: 100%;
+    height: 100%;
+    border-radius: 28px;
+}
+
+.boton-carrusel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
+
+.boton-carrusel-lista {
+    list-style: none;
+    padding: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    width: 10%;
+    height: 2.5rem;
+    border-radius: 28px;
+    background-color: #D9D9D9;
+}
+
+.boton-carrusel-lista li:nth-child(2) {
+    background-color: #D99D6C ;
+}
+
+.boton-carrusel-lista li {
+    background-color: #C1C1C1;
+    margin: auto;
+    border-radius: 28px;
+    width: 10%;
+    height: 60%;
+}
+
+.boton-carrusel-direccion  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 28px;
+    background-color: #D9D9D9;
+    height: 2.5rem;
+}
+
+.section-conjunto {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.section-conjunto-uno {
+    position: relative;
+    z-index: 1;
+    grid-row: span 2;
+    width: 100%;
+}
+
+.section-conjunto-uno img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.div-conjunto-uno {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 40%;
+    height: 12%;    
+    background: rgba(161, 160, 160, 0.6);
+    border-radius: 28px;
+}
+
+.div-conjunto-uno h2 {
+    text-align: center;
+    color: white;
+    opacity: 1;
+    font-size: 2.5rem;
+}
+
+.section-conjunto-dos {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.section-conjunto-dos img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+}
+
+.div-conjunto-dos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 5%;
+    left: 55%;
+    width: 45%;
+    height: 25%;    
+    background: rgba(161, 160, 160, 0.6);
+    border-radius: 28px;
+}
+
+.div-conjunto-dos h2 {
+    text-align: center;
+    color: white;
+    opacity: 1;
+    font-size: 2.5rem;
+}
+
+.section-conjunto-tres {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.section-conjunto-tres img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+}
+
+.div-conjunto-tres {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 70%;
+    left: 0%;
+    width: 45%;
+    height: 25%;     
+    background: rgba(161, 160, 160, 0.6);
+    border-radius: 28px;
+}
+
+.div-conjunto-tres h2 {
+    text-align: center;
+    color: white;
+    opacity: 1;
+    font-size: 2.5rem;
+}
+
+.boton-conjunto {
+    border: none;
+    border-radius: 28px;
+    background-color: #1E1E1E;
+    color: white;
+    width: 70%;
+    height: 30%;
+}
+
+.carrusel-main-dos {
+    text-align: center;
+    background-color: #FFFFFF;
+    width: 100vw;   
+    height: auto;
+    max-width: 100%;
+}
+
+.carrusel-main-dos h1{
+    text-transform: uppercase;
+    font-size: 2.8rem;
+    font-weight: 800;   
+}
+
+.carrusel-dos-img {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.carrusel-dos-img img{
+    background-color: #D9D9D9;
+    border-radius: 40px;
+}
+
+.carrusel-dos-img button{
+    background-color: #1E1E1E;
+    color: white;
+    border-radius: 18px;    
 }
