@@ -6,23 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
     <link rel="stylesheet" href="estiloperfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="top-bar">
-        <a href="#">Ayuda</a>
-        <a href="#">Pedidos y devoluciones</a>
-        <a href="#">Únete al club</a>
-    </div>
-    <header>
-        <div class="logo"><img src="logo.png" alt="Logo"></div>
-        <nav>
-            <ul>
-                <li>OFERTAS</li>
-                <li>MUJER</li>
-                <li>HOMBRE</li>
-                <li>LO NUEVO</li>
+    <header class="first-header">
+            
+        <div class="top-bar">
+            <ul class="top-bar-list">
+                <li>Ayuda</li>
+                <li>Pedidos y devoluciones</li>
             </ul>
+        </div>
+
+        <nav class="nav-main">
+            <a href="/main/index.html"><img src="/img/logoTrend.png" alt="logo de Trendify" class="img-logo"></a>
+            
+            <ul class="nav-list">
+                <li><a href="/productos/productos.html">Oferta</a></li>
+                <li><a href="/productos/productos.html">Hombre</a></li>
+                <li><a href="/productos/productos.html">Mujer</a></li>
+                <li><a href="/productos/productos.html">Nuevo</a></li>
+            </ul>
+
+            <div class="nav-left">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <a href="/carrito/carrito.html"><img src="/img/Shopping cart.png" alt="Carrito Compra" class="img-icon"></a>
+                <a href="#"><img src="/img/User.png" alt="User" class="img-icon"></a>
+            </div>
         </nav>
+        
     </header>
 
     <main>

@@ -5,20 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
     <link rel="stylesheet" href="carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <div class="logo">
-                    <img src="/img/logoTrend.png" alt="Logo de la tienda">
-                </div>
-                <li>OFERTAS</li>
-                <li>MUJER</li>
-                <li>HOMBRE</li>
-                <li>LO NUEVO</li>
+    <header class="first-header">
+            
+        <div class="top-bar">
+            <ul class="top-bar-list">
+                <li>Ayuda</li>
+                <li>Pedidos y devoluciones</li>
             </ul>
+        </div>
+
+        <nav class="nav-main">
+            <a href="/main/index.html"><img src="/img/logoTrend.png" alt="logo de Trendify" class="img-logo"></a>
+            
+            <ul class="nav-list">
+                <li><a href="/productos/productos.html">Oferta</a></li>
+                <li><a href="/productos/productos.html">Hombre</a></li>
+                <li><a href="/productos/productos.html">Mujer</a></li>
+                <li><a href="/productos/productos.html">Nuevo</a></li>
+            </ul>
+
+            <div class="nav-left">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <a href="/carrito/carrito.html"><img src="/img/Shopping cart.png" alt="Carrito Compra" class="img-icon"></a>
+                <a href="#"><img src="/img/User.png" alt="User" class="img-icon"></a>
+            </div>
         </nav>
+        
     </header>
 
     <main>
@@ -26,7 +49,7 @@
             <h1>Tu carrito <span>(3 artículos)</span></h1>
 
             <div class="producto">
-                <img src="y2k.png" alt="Camiseta Y2K">
+                <img src="/img/camisa1.svg" alt="Camiseta Y2K">
                 <div class="producto-info">
                     <h2>Camiseta Y2K para hombre</h2>
                     <p>Color: Negro/Blanco</p>
@@ -40,9 +63,9 @@
             </div>
 
             <div class="producto">
-                <img src="jpn.png" alt="Playera manga larga">
+                <img src="/img/camisa2.svg" alt="Playera manga corta">
                 <div class="producto-info">
-                    <h2>Playera Japón manga larga</h2>
+                    <h2>Playera Japón manga corta</h2>
                     <p>Color: Negro/Rosa</p>
                     <p>Talla: XL</p>
                     <label for="cantidad2">Cantidad:</label>
@@ -54,7 +77,7 @@
             </div>
 
             <div class="producto">
-                <img src="ts.png" alt="Sudadera Trendify">
+                <img src="/img/Chamarra.svg" alt="Sudadera Trendify">
                 <div class="producto-info">
                     <h2>Sudadera Cactus Jack x Trendify</h2>
                     <p>Color: Crema</p>
