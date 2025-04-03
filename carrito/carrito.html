@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+</head>
+<body>
+    <header class="first-header">
+            
+        <div class="top-bar">
+            <ul class="top-bar-list">
+                <li>Ayuda</li>
+                <li>Pedidos y devoluciones</li>
+            </ul>
+        </div>
+
+        <nav class="nav-main">
+            <a href="../main/index.php"><img src="../img/logoTrend.png" alt="logo de Trendify" class="img-logo"></a>
+            
+            <ul class="nav-list">
+                <li><a href="../productos/productos.html">Oferta</a></li>
+                <li><a href="../productos/productos.html">Hombre</a></li>
+                <li><a href="../productos/productos.html">Mujer</a></li>
+                <li><a href="../productos/productos.html">Nuevo</a></li>
+            </ul>
+
+            <div class="nav-left">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <a href="../carrito/carrito.html"><img src="../img/Shopping cart.png" alt="Carrito Compra" class="img-icon"></a>
+                <a href="#"><img src="../img/User.png" alt="User" class="..img-icon"></a>
+            </div>
+        </nav>
+        
+    </header>
+
+    <main>
+        <section class="carrito">
+            <h1>Tu carrito <span>(3 artículos)</span></h1>
+
+            <div class="producto">
+                <img src="../img/camisa1.svg" alt="Camiseta Y2K">
+                <div class="producto-info">
+                    <h2>Camiseta Y2K para hombre</h2>
+                    <p>Color: Negro/Blanco</p>
+                    <p>Talla: M</p>
+                    <label for="cantidad1">Cantidad:</label>
+                    <select id="cantidad1">
+                        <option>1</option>
+                    </select>
+                </div>
+                <p class="precio">$899.00</p>
+            </div>
+
+            <div class="producto">
+                <img src="../img/camisa2.svg" alt="Playera manga corta">
+                <div class="producto-info">
+                    <h2>Playera Japón manga corta</h2>
+                    <p>Color: Negro/Rosa</p>
+                    <p>Talla: XL</p>
+                    <label for="cantidad2">Cantidad:</label>
+                    <select id="cantidad2">
+                        <option>1</option>
+                    </select>
+                </div>
+                <p class="precio">$1,199.00</p>
+            </div>
+
+            <div class="producto">
+                <img src="../img/Chamarra.svg" alt="Sudadera Trendify">
+                <div class="producto-info">
+                    <h2>Sudadera Cactus Jack x Trendify</h2>
+                    <p>Color: Crema</p>
+                    <p>Talla: M</p>
+                    <label for="cantidad3">Cantidad:</label>
+                    <select id="cantidad3">
+                        <option>1</option>
+                    </select>
+                </div>
+                <p class="precio">$2,999.00</p>
+            </div>
+        </section>
+
+        <aside class="suma">
+            <button class="pagar">Ir a pagar ➝</button>
+            <div class="detalles-total">
+                <p>3 Productos <span>$5,097</span></p>
+                <p>Entrega <span>$300</span></p>
+                <p class="descuento">Descuento por envío <span>-$300</span></p>
+                <hr>
+                <p class="total">Total Estimado <span>$5,097</span></p>
+                <p class="ahorro">Has ahorrado <span>$300</span></p>
+                <a href="#">Usar un código promocional</a>
+            </div>
+        </aside>
+    </main>
+</body>
+</html>

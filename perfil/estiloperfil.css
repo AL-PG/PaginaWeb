@@ -1,0 +1,275 @@
+﻿
+body {
+    min-height: auto;
+    margin: 0;
+    padding: 0;
+    background: #eef1f6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    font-size: 62.5%;
+    font-family: Montserrat;
+} 
+
+* {
+    box-sizing: border-box;
+    font-size: 1.6rem;
+} 
+
+
+.top-bar{
+    display: flex;
+    justify-content: flex-end;
+    background-color: #D99D6C;
+    padding: 5px 20px;
+    font-size: 12px;
+    margin: 0;
+}
+
+.top-bar a{
+    color: black;
+    text-decoration: none;
+    margin-left: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.top-bar a:hover {
+    text-decoration: underline;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1A1A1A;
+    padding: 10px 20px;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo img{
+    height: 50px;
+    width: 50px;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+}
+
+nav ul li{
+    margin: 0 15px;
+    font-family: 'Konkhmer Sleokchher', sans-serif;
+}
+
+nav ul li a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li:hover{
+    background-color: #373737;
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #313131;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.search-box input {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 5px;
+    width: 150px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-box i {
+    color: rgb(255, 255, 255) !important;
+    margin-left: 5px;
+}
+
+.search-box input::placeholder {
+    color: #bcbcbc; 
+    opacity: 1; 
+    font-family: 'Montserrat', sans-serif;
+}
+
+.icons{
+    display: flex;
+    align-items: center;
+}
+
+.icons input {
+    padding: 5px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.icons i {
+    color: white;
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    padding: 40px;
+    gap: 40px;
+}
+
+aside {
+    width: 20%;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+    aside ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    aside li {
+        padding: 10px 0;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+        aside li:hover {
+            color: #000;
+        }
+
+.perfil {
+    flex: 1;
+    background: white;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+.perfil-contenedor {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.perfil-info, .perfil-contraseña {
+    width: 48%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+    .campo label {
+        display: block;
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    .campo input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+.guardar {
+    background: #222;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+    .guardar:hover {
+        background: #444;
+    }
+
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+input {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+    input:focus {
+        border-color: #000;
+        outline: none;
+    }
+
+
+.preferencias {
+    margin-top: 20px;
+}
+
+.preferencias p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.preferencias label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.preferencias input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, li {
+    padding: 0%;
+    list-style: none;
+}
+.nav-list li:hover{
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}

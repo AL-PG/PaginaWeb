@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="first-header">
+
+        <nav class="nav-main">
+            <a href="../main/index.php"><img src="../img/logoTrend.png" alt="logo de Trendify" class="img-logo"></a>
+            
+            <ul class="nav-list">
+                <li><a href="../productos/productos.html">Oferta</a></li>
+                <li><a href="../productos/productos.html">Hombre</a></li>
+                <li><a href="../productos/productos.html">Mujer</a></li>
+                <li><a href="../productos/productos.html">Lo Nuevo</a></li>
+            </ul>
+
+            <div class="nav-left">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <a href="../carrito/carrito.html"><img src="../img/Shopping cart.png" alt="Carrito Compra" class="img-icon"></a>
+                <a href="#"><img src="../img/User.png" alt="User" class="img-icon"></a>
+            </div>
+        </nav>
+
+        <img class="img-header" src="../img/header-producto.svg" alt="">
+
+    </header>
+
+    <main class="main-productos">
+        <div class="main-div">
+            <div class="header-main">
+                <h1>Conoce Nuestros Productos</h1>
+                <div class="header-buscar">
+                    <input type="text" placeholder="Buscar productos" class="input-buscar">
+                    <button type="button">Buscar</button>
+                </div>
+            </div>
+            <div class="container-main">
+                <aside class="filtros">
+                    <h2>Filtrar Productos</h2>
+                
+                    <label for="categoria" class="titulo-label">Categoría:</label>
+                    <select id="categoria">
+                        <option value="">Todas</option>
+                        <option value="Hombre">Hombre</option>
+                        <option value="Mujer">Mujer</option>
+                        <option value="accesorios">Accesorios</option>
+                    </select>
+                
+                    <label for="precio" class="titulo-label">Rango de Precio:</label>
+                    <input type="range" id="precio" class="range" min="0" max="1000" step="10">
+                    <span id="valor-precio">500</span>
+                    
+                    <label for="talla" class="titulo-label">Talla:</label>
+                    <div class="talla-options">
+                        <label for="s">S</label>
+                        <input type="checkbox" id="s" name="talla" value="S">
+                        <label for="m">M</label>
+                        <input type="checkbox" id="m" name="talla" value="M">
+                        <label for="l">L</label>
+                        <input type="checkbox" id="l" name="talla" value="L">
+                        <label for="xl">XL</label>
+                        <input type="checkbox" id="xl" name="talla" value="XL">
+                        <label for="xxl">XXL</label>
+                        <input type="checkbox" id="xxl" name="talla" value="XXL">
+                    </div>
+
+                    <button>Aplicar filtros</button>
+                    
+                </aside>
+    
+                <section class="product-section">
+                    <a href="../verProducto/verProducto.html">
+                        <div class="product-card">
+                            <img src="../img/camisa1.svg" alt="Producto 2">
+                            <h2>Nombre Producto 2</h2>
+                            <span>$29.99</span>
+                        </div>
+                    </a>
+                    
+    
+                    <div class="product-card">
+                        <img src="../img/camisa1.svg" alt="Producto 2">
+                        <h2>Nombre Producto 2</h2>
+                        <span>$29.99</span>
+                    </div>
+    
+                    <div class="product-card">
+                        <img src="../img/camisa1.svg" alt="Producto 3">
+                        <h2>Nombre Producto 3</h2>
+                        <span>$39.99</span>
+                    </div>
+                    <div class="product-card">
+                        <img src="../img/camisa1.svg" alt="Producto 1">
+                        <h2>Nombre Producto 1</h2>
+                        <span>$19.99</span>
+                    </div>
+    
+                    <div class="product-card">
+                        <img src="../img/camisa1.svg" alt="Producto 2">
+                        <h2>Nombre Producto 2</h2>
+                        <span>$29.99</span>
+                    </div>
+    
+                    <div class="product-card">
+                        <img src="../img/camisa1.svg" alt="Producto 3" >
+                        <h2>Nombre Producto 3</h2>
+                        <span>$39.99</span>
+                    </div>
+                </section>
+            </div>
+        </div>  
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="img/isotipo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&family=Montserrat:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src='script.js'></script>
+    <script src="ventanaTallas.js"></script>
+</head>
+
+<body>
+    <div class="top-bar">
+        <a href="#">Ayuda</a>
+        <a href="#">Pedidos y devoluciones</a>
+        <a href="#">Únete al club</a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="logo">
+        </div>
+        <nav>
+            <ul>
+                <li href="#">OFERTAS</li>
+                <li href="#">MUJER</li>
+                <li href="#">HOMBRE</li>
+                <li href="#">LO NUEVO</li>
+            </ul>
+        </nav>
+        <div class="icons">
+            <div class="search-box">
+                <input type="text" placeholder="Buscar">
+                <i class="fas fa-search"></i>
+            </div>
+            <a href="../carrito/carrito.html">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            
+            <div class="user-icon-container">
+                <i class="fas fa-user" id="userIcon"></i>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="#"><i class="far fa-heart"></i> Favoritos</a>
+                    <a href="#"><i class="fas fa-shopping-bag"></i> Mis compras</a>
+                    <a href="#"><i class="fas fa-credit-card"></i> Método de pago</a>
+                    <a href="#"><i class="fas fa-user-circle"></i> Mis datos</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="product-container">
+        <section class="product-gallery">
+            <div class="thumbnail-images">
+                <img src="img/thumb1.webp" alt="Vista 1" data-full="img/main-image.webp" class="active-thumbnail">
+                <img src="img/thumb2.webp" alt="Vista 2" data-full="img/thumb2.webp">
+                <img src="img/thumb3.webp" alt="Vista 3" data-full="img/thumb3.webp">
+                <img src="img/thumb4.webp" alt="Vista 4" data-full="img/thumb4.webp">
+            </div>
+            <div class="main-image">
+                <img src="img/main-image.webp" alt="Camisa STWD" id="mainProductImage">
+            </div>
+        </section>
+        <section class="product-details">
+            <div class="product-header">
+                <span class="product-category">Hombre</span>
+                <div class="product-rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <span class="review-count">(42 reseñas)</span>
+                </div>
+            </div>
+            <h2>Camisa STWD gráfico espalda</h2>
+            <p class="price">MXN 899.00</p>
+            <p class="color">Color: Negro</p>
+            <div class="sizes">
+                <span class="size-option">XS</span>
+                <span class="size-option">S</span>
+                <span class="size-option selected">M</span>
+                <span class="size-option">L</span>
+                <span class="size-option">XL</span>
+            </div>
+            <div class="size-guide">
+                <a href="#" class="size-guide-link" id="sizeGuideLink">
+                    <span class="guide-text">Ver guía de tallas</span>
+                    <i class="fas fa-ruler icon"></i>
+                </a>
+            </div>
+            <div class="quantity-selector">
+                <button class="quantity-minus">-</button>
+                <input type="number" value="1" min="1" class="quantity-input">
+                <button class="quantity-plus">+</button>
+            </div>
+            <div class="add-to-cart-container">
+                <button class="add-to-cart">AÑADIR AL CARRITO</button>
+                <i class="far fa-heart wishlist-icon"></i>
+            </div>
+            <p class="description">Camisa boxy de cuadros con gráfico en la parte trasera, con cierre de botones y
+                confeccionada en algodón.</p>
+            <div class="product-info-section">
+                <div class="info-divider"></div>
+                <div class="info-accordion">
+                    <div class="accordion-header">
+                        <span>Composición y cuidado</span>
+                        <i class="fas fa-plus accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Composición:</strong> 100% Algodón</p>
+                        <p><strong>Cuidado:</strong>
+                        <ul>
+                            <li>Lavar a máquina a 30°C</li>
+                            <li>No usar blanqueador</li>
+                            <li>Planchar a temperatura media</li>
+                            <li>No secar en secadora</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                <div class="info-divider"></div>
+            </div>
+        </section>
+    </main>
+    <section class="related-products">
+        <h3>Esto podría gustarte</h3>
+        <div class="products">
+            <div class="product">
+                <div class="heart-icon"><i class="far fa-heart"></i></div>
+                <img src="img/related1.webp" alt="Producto relacionado 1">
+                <p class="product-name">Playera STWD</p>
+                <p class="product-price">MXN 499.00</p>
+            </div>
+            <div class="product">
+                <div class="heart-icon"><i class="far fa-heart"></i></div>
+                <img src="img/related2.webp" alt="Producto relacionado 2">
+                <p class="product-name">Playera STWD</p>
+                <p class="product-price">MXN 549.00</p>
+            </div>
+            <div class="product">
+                <div class="heart-icon"><i class="far fa-heart"></i></div>
+                <img src="img/related3.webp" alt="Producto relacionado 3">
+                <p class="product-name">Playera STWD</p>
+                <p class="product-price">MXN 599.00</p>
+            </div>
+            <div class="product">
+                <div class="heart-icon"><i class="far fa-heart"></i></div>
+                <img src="img/related4.webp" alt="Producto relacionado 4">
+                <p class="product-name">Playera STWD</p>
+                <p class="product-price">MXN 449.00</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <div class="size-guide-modal" id="sizeGuideModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h4>GUÍA DE TALLAS</h4>
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>Talla</th>
+                        <th>Cuello (cm)</th>
+                        <th>Cuello (pulg)</th>
+                        <th>Pecho (cm)</th>
+                        <th>Pecho (pulg)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>XS</td>
+                        <td>29.0-31.0</td>
+                        <td>11.3-12.1</td>
+                        <td>78.0-82.0</td>
+                        <td>30.4-32.0</td>
+                    </tr>
+                    <tr>
+                        <td>S</td>
+                        <td>31.0-33.0</td>
+                        <td>12.1-12.9</td>
+                        <td>82.0-86.0</td>
+                        <td>32.0-33.5</td>
+                    </tr>
+                    <tr>
+                        <td>M</td>
+                        <td>33.0-35.0</td>
+                        <td>12.9-13.7</td>
+                        <td>86.0-90.0</td>
+                        <td>33.5-35.2</td>
+                    </tr>
+                    <tr>
+                        <td>L</td>
+                        <td>35.0-37.0</td>
+                        <td>13.7-14.5</td>
+                        <td>90.0-94.0</td>
+                        <td>35.2-36.8</td>
+                    </tr>
+                    <tr>
+                        <td>XL</td>
+                        <td>37.0-39.0</td>
+                        <td>14.5-15.3</td>
+                        <td>94.0-98.0</td>
+                        <td>36.8-38.4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="ventanaTallas.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #D99D6C;
+    padding: 5px 20px;
+    font-size: 12px;
+}
+
+.top-bar a {
+    color: black;
+    text-decoration: none;
+    margin-left: 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.top-bar a:hover {
+    text-decoration: underline;
+}
+
+body {
+    background-color: #f8f8f8;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1A1A1A;
+    padding: 10px 20px;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 15px;
+    font-family: 'Konkhmer Sleokchher', sans-serif;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li:hover {
+    background-color: #373737;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #313131;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.search-box input {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 5px;
+    width: 150px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-box i {
+    color: rgb(255, 255, 255) !important;
+    margin-left: 5px;
+}
+
+.search-box input::placeholder {
+    color: #bcbcbc;
+    opacity: 1;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons input {
+    padding: 5px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.icons i {
+    color: white;
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 5px;
+    overflow: hidden;
+    animation: fadeIn 0.3s;
+}
+
+.user-dropdown a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.user-dropdown a:hover {
+    background-color: #f5f5f5;
+}
+
+.user-dropdown i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 5px 0;
+}
+
+.user-dropdown.show {
+    display: block;
+}
+
+.user-dropdown a i {
+    color: #D99D6C; /* Color principal de tu sitio (mismo que la top-bar) */
+}
+
+/* Cambiar color al pasar el mouse */
+.user-dropdown a:hover i {
+    color: #1A1A1A; /* Color oscuro para contraste */
+}
+
+/* Color específico para el ícono de cerrar sesión */
+.user-dropdown a:last-child i {
+    color: #000000; /* Rojo para acción importante */
+}
+
+.user-dropdown a:last-child:hover i {
+    color: #4a4a4a; /* Rojo más oscuro al pasar el mouse */
+}
