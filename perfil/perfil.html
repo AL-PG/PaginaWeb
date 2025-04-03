@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +8,11 @@
     <link rel="stylesheet" href="estiloperfil.css">
 </head>
 <body>
+    <div class="top-bar">
+        <a href="#">Ayuda</a>
+        <a href="#">Pedidos y devoluciones</a>
+        <a href="#">Únete al club</a>
+    </div>
     <header>
         <div class="logo"><img src="logo.png" alt="Logo"></div>
         <nav>
@@ -18,7 +24,7 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <aside>
             <ul>
@@ -30,43 +36,54 @@
                 <li>Artículos guardados</li>
             </ul>
         </aside>
-        
+
         <section class="perfil">
             <h1>Perfil</h1>
-            <div class="perfil-info">
-                <img src="avatar.jpg" alt="Avatar" class="avatar">
-                <div>
-                    <h2>Santiago Gimenez</h2>
-                    <p>Miembro de Trendify desde 2025</p>
-                    <div class="info-box">
-                        <label>Número de teléfono</label>
-                        <input type="text" value="443-972-9483">
-                        <label>Código postal</label>
-                        <input type="text" value="60954">
+            <div class="perfil-contenedor">
+                <div class="perfil-info">
+                    <h2>Información de la cuenta</h2>
+                    <div class="campo">
+                        <label>Nombre</label>
+                        <input type="text">
                     </div>
-                    <div class="info-box">
-                        <label>Fecha de nacimiento</label>
-                        <input type="text" value="20/07/2004">
-                        <label>Género</label>
-                        <input type="text" value="Hombre">
+                    <div class="campo">
+                        <label>Apellidos</label>
+                        <input type="text" >
                     </div>
-                    <div class="info-box">
+                    <div class="campo">
                         <label>Correo electrónico</label>
-                        <input type="text" value="guillermogb21@gmail.com">
-                        <button>Cambiar</button>
+                        <input type="text" >
                     </div>
-                    <a href="#">Cambiar contraseña</a>
+                    <button class="guardar">Guardar</button>
+                </div>
+
+                <div class="perfil-contraseña">
+                    <h2>Contraseña</h2>
+                    <div class="campo">
+                        <label>Contraseña actual</label>
+                        <input type="password">
+                    </div>
+                    <div class="campo">
+                        <label>Nueva contraseña</label>
+                        <input type="password">
+                    </div>
+                    <div class="campo">
+                        <label>Repite la contraseña</label>
+                        <input type="password">
+                    </div>
+                    <button class="guardar">Guardar</button>
                 </div>
             </div>
-            <h2>Preferencias</h2>
-            <div class="preferencias">
-                <p>¿Para quién compras?</p>
-                <label><input type="checkbox" checked> Para hombre</label>
-                <label><input type="checkbox"> Para mujer</label>
-                <label><input type="checkbox"> Niño</label>
-                <label><input type="checkbox"> Niña</label>
-            </div>
         </section>
+
+        <h2>Preferencias</h2>
+        <div class="preferencias">
+            <p>¿Para quién compras?</p>
+            <label><input type="checkbox" checked> Para hombre</label>
+            <label><input type="checkbox"> Para mujer</label>
+            <label><input type="checkbox"> Niño</label>
+            <label><input type="checkbox"> Niña</label>
+        </div>
     </main>
 </body>
-</html>
+</html> 
