@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trendify</title>
     <link rel="stylesheet" href="main.css">
+    <script src="/main/main.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,13 +24,13 @@
         </div>
 
         <nav class="nav-main">
-            <img src="/img/logoTrend.png" alt="logo de Trendify" class="img-logo">
+            <a href="/main/index.html"><img src="/img/logoTrend.png" alt="logo de Trendify" class="img-logo"></a>
             
             <ul class="nav-list">
-                <li>Oferta</li>
-                <li>Hombre</li>
-                <li>Mujer</li>
-                <li>Nuevo</li>
+                <li><a href="/productos/productos.html">Oferta</a></li>
+                <li><a href="/productos/productos.html">Hombre</a></li>
+                <li><a href="/productos/productos.html">Mujer</a></li>
+                <li><a href="/productos/productos.html">Nuevo</a></li>
             </ul>
 
             <div class="nav-left">
@@ -37,7 +38,7 @@
                     <input type="text" placeholder="Buscar">
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
-                <a href="#"><img src="/img/Shopping cart.png" alt="Carrito Compra" class="img-icon"></a>
+                <a href="/carrito/carrito.html"><img src="/img/Shopping cart.png" alt="Carrito Compra" class="img-icon"></a>
                 <a href="#"><img src="/img/User.png" alt="User" class="img-icon"></a>
             </div>
         </nav>
@@ -58,14 +59,15 @@
                         <p>Descubre nuestra nueva chamarra, diseñada para combinar estilo, comodidad y funcionalidad. 
                             Fabricada con materiales de alta calidad, ofrece la protección ideal contra el 
                             frío sin sacrificar ligereza y movilidad.</p>
-                        <button type="button">Mas informacion</button>
                     </div>
     
                     <img src="/img/portada.png" alt="Una persona utilizando una prenda de TRENDIFY" class="img-portada">
     
                     <div class="div-imagen-main">
                         <div>
-                            <img src="/img/chaqueta-port.png" alt="chaqueta de TRENDIFY">
+                            <a href="#">
+                                <img src="/img/chaqueta-port.png" alt="chaqueta de TRENDIFY">
+                            </a>
                         </div>
                         <span>Comprala ahora!</span>
                     </div>
@@ -74,30 +76,26 @@
             </div>
         </section>
     
-        <section class="carrusel-main-uno">
+        <section class="carrusel-main-uno" data-carousel>
             <h1>explora nuestros estilos</h1>
-            <div class="carrusel-img">
-                <div class="carrusel-img-lado-izquierdo">
+
+            <ul class="carrusel-img" data-slides>
+                <li class="carrusel-img-izquierda">
                     <img src="/img/carrusel2.svg" alt="imagen del carrusel">
-                </div>
+                </li>
     
-                <div class="carrusel-img-central">
+                <li class="carrusel-img-central" data-active>
                     <img src="/img/carrusel1.svg" alt="imagen del carrusel">
-                </div>
+                </li>
     
-                <div class="carrusel-img-lado-derecho">
+                <li class="carrusel-img-derecha">
                     <img src="/img/carrusel3.svg" alt="imagen del carrusel">
-                </div>
-            </div>
+                </li>
+            </ul>
     
             <div class="boton-carrusel">
-                <button type="button" class="boton-carrusel-direccion"><i class="fa-solid fa-arrow-left"></i></button>
-                <ul class="boton-carrusel-lista">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-                <button type="button" class="boton-carrusel-direccion"><i class="fa-solid fa-arrow-right"></i></button>
+                <button type="button" class="boton-carrusel-direccion" data-carousel-button="prev"><i class="fa-solid fa-arrow-left"></i></button>
+                <button type="button" class="boton-carrusel-direccion" data-carousel-button="next"><i class="fa-solid fa-arrow-right"></i></button>
     
             </div>
         </section>
@@ -105,26 +103,29 @@
         <section class="section-conjunto">
     
             <div class="section-conjunto-uno">
-                <img src="/img/conjunto1.svg" alt="">
+                <a href="#">
+                    <img src="/img/conjunto1.svg" alt="">
+                </a>
                 <div class="div-conjunto-uno">
                     <h2>Conjunto Especial</h2>
-                    <button type="button" class="boton-conjunto">Ver conjunto</button>
                 </div>
             </div>
     
             <div class="section-conjunto-dos">
-                <img src="/img/conjunto2.svg" alt="">
+                <a href="#">
+                    <img src="/img/conjunto2.svg" alt="">
+                </a>
                 <div class="div-conjunto-dos">
                     <h2>Conjunto Especial</h2>
-                    <button type="button" class="boton-conjunto">Ver conjunto</button>
                 </div>
             </div>
     
             <div class="section-conjunto-tres">
-                <img src="/img/conjunto3.svg" alt="">
+                <a href="#">
+                    <img src="/img/conjunto3.svg" alt="">
+                </a>
                 <div class="div-conjunto-tres">
                     <h2>Conjunto Especial</h2>
-                    <button type="button" class="boton-conjunto">Ver conjunto</button>
                 </div>
             </div>
     
@@ -136,25 +137,28 @@
 
             <div class="carrusel-dos-img">
 
-                <div class="carrusel-dos-img-uno">
-                    <img src="/img/Chamarra.svg" alt="imagen del carrusel">
+                <div>
+                    <a href="">
+                        <img src="/img/camisa2.svg" alt="imagen del carrusel">
+                    </a>
                     <p>Camiseta Y2K para hombre</p>
                     <p>$199.00</p>
-                    <button type="button">Comprar</button>
                 </div>
     
-                <div class="carrusel-dos-img-dos">
-                    <img src="/img/camisa2.svg" alt="imagen del carrusel">
-                    <p>Camiseta Y2K para hombre</p>
+                <div>
+                    <a href="">
+                        <img src="/img/Chamarra.svg" alt="imagen del carrusel">
+                    </a>
+                    <p>Chamarra para hombre</p>
                     <p>$199.00</p>
-                    <button type="button">Comprar</button>
                 </div>
     
-                <div class="carrusel-dos-img-uno">
-                    <img src="/img/camisa1.svg" alt="imagen del carrusel">
+                <div>
+                    <a href="">
+                        <img src="/img/camisa1.svg" alt="imagen del carrusel">
+                    </a>
                     <p>Camiseta Y2K para hombre</p>
                     <p>$199.00</p>
-                    <button type="button">Comprar</button>
                 </div>
             </div>
         </section>

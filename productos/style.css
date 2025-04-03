@@ -17,6 +17,16 @@ html, body {
     font-size: 1.6rem;
 } 
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, li {
+    padding: 0%;
+    list-style: none;
+}
+
 .first-header {
     width: 100vw;
 }
@@ -50,7 +60,7 @@ html, body {
 }
 
 .img-logo{
-    width: 7.5%;
+    width: 60%;
 }   
 
 .nav-list li {
