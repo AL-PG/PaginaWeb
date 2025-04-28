@@ -8,7 +8,8 @@ export default {
     extend: {
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],
-        'konkhmer-sleokchher': ['"Konkhmer Sleokchher"', 'sans-serif'], // Updated key to match class name
+        'konkhmer-sleokchher': ['"Konkhmer Sleokchher"', 'sans-serif'], 
+        gabarito: ["Gabarito", "sans-serif"]// Updated key to match class name
       },
     },
   },
