@@ -44,101 +44,109 @@ function Trendify() {
           </div>
         </section>
 
-        <section className="carrusel-main-uno" data-carousel>
-          <h1>Explora nuestros estilos</h1>
+        <section className="text-center bg-white w-screen max-w-full" data-carousel>
+          <h1 className='uppercase mb-5 text-[2.8rem] font-extrabold'>Explora nuestros estilos</h1>
 
-          <ul className="carrusel-img" data-slides>
-            <li className="carrusel-img-izquierda">
-              <img src="/img/carrusel2.svg" alt="imagen del carrusel" />
+          <ul className="flex justify-center items-center flex-row gap-2" data-slides>
+            <li className="rounded-[28px] aspect-[2/1] w-4/5 opacity-50 transition-opacity duration-300 ease-in-out">
+              <img src="./img/carrusel2.svg" alt="imagen del carrusel" className='rounded-[28px] w-full h-full object-cover'/>
             </li>
 
-            <li className="carrusel-img-central" data-active>
-              <img src="/img/carrusel1.svg" alt="imagen del carrusel" />
+            <li className="rounded-[28px] aspect-[2/1] w-4/5 opacity-50 transition-opacity duration-300 ease-in-out" data-active>
+              <img src="./img/carrusel1.svg" alt="imagen del carrusel" className='rounded-[28px] w-full h-full object-cover'/>
             </li>
 
-            <li className="carrusel-img-derecha">
-              <img src="/img/carrusel3.svg" alt="imagen del carrusel" />
+            <li className="rounded-[28px] aspect-[2/1] w-4/5 opacity-50 transition-opacity duration-300 ease-in-out">
+              <img src="./img/carrusel3.svg" alt="imagen del carrusel" className='rounded-[28px] w-full h-full object-cover'/>
             </li>
           </ul>
 
-          <div className="boton-carrusel">
-            <button type="button" className="boton-carrusel-direccion" data-carousel-button="prev">
+          <div className="flex flex-row justify-center items-center gap-2 my-4">
+            <button type="button" data-carousel-button="prev"
+            className="flex justify-center items-center border-none rounded-[10px] bg-[#D99D6C] h-16 w-1/5 cursor-pointer relative z-10 hover:bg-[#a87247]">
               <FaArrowLeft />
             </button>
-            <button type="button" className="boton-carrusel-direccion" data-carousel-button="next">
+            <button type="button" data-carousel-button="next"
+            className='flex justify-center items-center border-none rounded-[10px] bg-[#D99D6C] h-16 w-1/5 cursor-pointer relative z-10 hover:bg-[#a87247]'>
               <FaArrowRight />
             </button>
           </div>
         </section>
 
-        <section className="section-conjunto">
-          <div className="section-conjunto-uno">
+        <section className="grid grid-cols-2 grid-rows-2 w-full h-auto">
+          <div className="relative z-[1] row-span-2 w-full">
             <a href="#">
-              <img src="/img/conjunto1.svg" alt="Conjunto especial 1" />
+              <img src="./img/conjunto1.svg" alt="Conjunto especial 1" 
+              className='w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:drop-shadow-[5px_5px_15px_rgba(0,0,0,0.3)]'/>
             </a>
-            <div className="div-conjunto-uno">
-              <h2>Conjunto Especial</h2>
+            <div className="flex flex-col items-center justify-center absolute top-1/2 left-0 w-[40%] h-[8%] bg-[rgba(161,160,160,0.6)] rounded-[28px]">
+              <h2 className='text-white text-3xl font-[montserrat] font-black text-center opacity-100'>Conjunto Especial</h2>
             </div>
           </div>
 
-          <div className="section-conjunto-dos">
+          <div className="relative z-[1] w-full">
             <a href="#">
-              <img src="/img/conjunto2.svg" alt="Conjunto especial 2" />
+              <img src="./img/conjunto2.svg" alt="Conjunto especial 2" 
+              className='w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:drop-shadow-[5px_5px_15px_rgba(0,0,0,0.3)]'/>
             </a>
-            <div className="div-conjunto-dos">
-              <h2>Conjunto Especial</h2>
+            <div className="flex flex-col items-center justify-center absolute top-[5%] left-[55%] w-[45%] h-[15%] bg-[rgba(161,160,160,0.6)] rounded-[28px]">
+              <h2 className='text-white text-3xl font-[montserrat] font-black text-center opacity-100'>Conjunto Especial</h2>
             </div>
           </div>
 
-          <div className="section-conjunto-tres">
+          <div className="relative z-[1] w-full">
             <a href="#">
-              <img src="/img/conjunto3.svg" alt="Conjunto especial 3" />
+              <img src="./img/conjunto3.svg" alt="Conjunto especial 3" 
+              className='w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:drop-shadow-[5px_5px_15px_rgba(0,0,0,0.3)]'/>
             </a>
-            <div className="div-conjunto-tres">
-              <h2>Conjunto Especial</h2>
+            <div className="flex flex-col items-center justify-center absolute top-[70%] left-0 w-[45%] h-[15%] bg-[rgba(161,160,160,0.6)] rounded-[28px]">
+              <h2 className='text-white text-3xl font-[montserrat] font-black text-center opacity-100'>Conjunto Especial</h2>
             </div>
           </div>
         </section>
 
-        <section className="carrusel-main-dos">
-          <h1>Lo más popular</h1>
+        <section className="text-center bg-white w-screen max-w-full h-auto">
+          <h1 className='uppercase text-[2.8rem] font-extrabold'>Lo más popular</h1>
 
-          <div className="carrusel-dos-img">
+          <div className="grid grid-cols-3 items-center justify-center justify-items-center gap-2 p-4">
             <div>
               <a href="#">
-                <img src="/img/camisa2.svg" alt="Camiseta Y2K para hombre" />
+                <img src="./img/camisa2.svg" alt="Camiseta Y2K para hombre" className='w-full bg-[#D9D9D9] rounded-[40px] overflow-hidden'/>
               </a>
-              <p>Camiseta Y2K para hombre</p>
+              <p className='font-bold uppercase'>Camiseta Y2K para hombre</p>
               <p>$199.00</p>
             </div>
 
             <div>
               <a href="#">
-                <img src="/img/Chamarra.svg" alt="Chamarra para hombre" />
+                <img src="./img/Chamarra.svg" alt="Chamarra para hombre" className='w-full bg-[#D9D9D9] rounded-[40px] overflow-hidden'/>
               </a>
-              <p>Chamarra para hombre</p>
+              <p className='font-bold uppercase'>Chamarra para hombre</p>
               <p>$199.00</p>
             </div>
 
             <div>
               <a href="#">
-                <img src="/img/camisa1.svg" alt="Camiseta Y2K para hombre" />
+                <img src="./img/camisa1.svg" alt="Camiseta Y2K para hombre" className='w-full bg-[#D9D9D9] rounded-[40px] overflow-hidden'/>
               </a>
-              <p>Camiseta Y2K para hombre</p>
+              <p className='font-bold uppercase'>Camiseta Y2K para hombre</p>
               <p>$199.00</p>
             </div>
           </div>
         </section>
 
-        <section className="section-about_us">
-          <img src="/img/img-about_us.svg" alt="Imagen de la sección sobre nosotros" />
+        <section className="relative z-10 w-screen">
+          <img src="./img/img-about_us.svg" alt="Imagen de la sección sobre nosotros" className='w-full object-cover'/>
 
-          <div className="section-about_us-div">
-            <h1>Sobre nosotros</h1>
-            <div className="section-about_us-div_texto">
-              <p>En Trendify la moda es más que ropa: es una forma de expresión...</p>
-              <p>Nos inspiramos en la cultura urbana, las últimas tendencias globales y el espíritu libre de nuestra generación...</p>
-              <p>Ya sea que busques un look casual, streetwear o algo más atrevido, aquí encontrarás las piezas perfectas para hacerlo realidad.</p>
+          <div className="flex flex-col items-center justify-center absolute top-0 left-1/2 w-1/2 h-full bg-[rgba(185,185,185,0.2)] backdrop-blur-md">
+            <h1 className='uppercase text-center font-black text-white text-7xl mb-10 pr-12 pl-12'>Sobre nosotros</h1>
+            <div className="flex flex-col text-center text-white mx-10 gap-5">
+            <p className='text-justify font-medium text-2xl m-0 pr-10 pl-10'>En Trendify la moda es más que ropa: es una forma de expresión. Nacimos con la misión de ofrecer tendencias frescas, 
+            auténticas y accesibles para jóvenes que quieren destacar con su propio estilo. </p>
+            <p className='text-justify font-medium text-2xl m-0 pr-10 pl-10'>Nos inspiramos en la cultura urbana, las últimas tendencias globales y el espíritu libre de nuestra generación. 
+            Cada prenda en nuestra tienda está cuidadosamente seleccionada para que puedas combinar comodidad, actitud y originalidad en cada outfit.
+            Creemos en la moda sin reglas, en la creatividad sin límites y en la libertad de ser quien quieras ser.</p>    
+            <p className='text-justify font-medium text-2xl m-0 pr-10 pl-10'>Ya sea que busques un look casual, streetwear o algo más atrevido, aquí encontrarás las piezas perfectas para hacerlo realidad.</p>
             </div>
           </div>
         </section>
