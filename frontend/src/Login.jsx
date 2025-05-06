@@ -36,7 +36,7 @@ const Login = () => {
         const result = await response.json();
         setIsLoggedIn(true); // Activar sesión
         setUser(result.user); // Store user info
-        navigate('/inicio', { state: { user: result.user } }); // Redirect to Inicio
+        navigate('/inicio', { state: { user: result.user, isLoggedIn: true } }); // Redirect to Inicio with user info
       } else {
         const result = await response.json();
         alert(`Error: ${result.error}`);
@@ -50,7 +50,7 @@ const Login = () => {
 
   return (
     <div className="bg-[#f8f8f8] min-h-screen font-montserrat flex flex-col">
-      <Header isLoggedIn={isLoggedIn} /> {/* Pasar estado de sesión al Header */}
+      <Header isLoggedIn={isLoggedIn} user={user} /> {/* Pass user info to Header */}
       <div className="flex justify-center items-center flex-grow px-5 gap-[50px]"> {/* Removed mt-14 and mb-10 */}
         <div className="w-[40%] max-w-[400px] sticky">
           <h2 className="text-2xl mb-5 font-konkhmer font-light">INICIA SESIÓN</h2>

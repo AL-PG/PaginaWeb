@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Componentes/Header';
 import Footer from './Componentes/Footer';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
+import '@fortawesome/fontawesome-free/css/all.min.css'; // Añade esta línea al principio
 
 const ProductosHombre = () => {
     const [productos, setProductos] = useState([]);
@@ -13,10 +14,16 @@ const ProductosHombre = () => {
     const [searchTerm, setSearchTerm] = useState(""); // State for search term
     const location = useLocation(); // Get state from navigation
     const user = location.state?.user; // Safely access user data
+    const navigate = useNavigate(); // Initialize navigate function
+    const [favoritosMessage, setFavoritosMessage] = useState(""); // State for confirmation message
 
     const [selectedCategoria, setSelectedCategoria] = useState(""); // State for selected category
     const [selectedColor, setSelectedColor] = useState(""); // State for selected color
     const [selectedPrecio, setSelectedPrecio] = useState(maxPrecio); // State for selected price range
+
+    const [ratings, setRatings] = useState({});
+
+    console.log("User data:", user); // Debug: Log user data
 
     useEffect(() => {
         fetch('http://localhost/Trendify/backend/getProducto.php') // Updated URL
@@ -51,6 +58,58 @@ const ProductosHombre = () => {
             .catch(error => console.error('Error fetching products:', error));
     }, []);
 
+    useEffect(() => {
+        const fetchRatings = async () => {
+            const ratingsData = {};
+            for (const producto of productos) {
+                try {
+                    const response = await fetch(`http://localhost/Trendify/backend/getCalificacion.php?idProducto=${producto.idProducto}`);
+                    const data = await response.json();
+                    ratingsData[producto.idProducto] = {
+                        promedio: data.promedio_calificacion || 0,
+                        reseñas: data.numero_calificaciones || 0
+                    };
+                } catch (error) {
+                    console.error(`Error fetching rating for product ${producto.idProducto}:`, error);
+                    ratingsData[producto.idProducto] = { promedio: 0, reseñas: 0 };
+                }
+            }
+            setRatings(ratingsData);
+        };
+
+        if (productos.length > 0) {
+            fetchRatings();
+        }
+    }, [productos]);
+
+    useEffect(() => {
+        const loadFavoritos = async () => {
+            if (user?.id) {
+                try {
+                    const response = await fetch(`http://localhost/Trendify/backend/getFavoritos.php?idUsuario=${user.id}`);
+                    const data = await response.json();
+                    const initialFavoritos = data.reduce((acc, curr) => {
+                        acc[curr.idProducto] = true;
+                        return acc;
+                    }, {});
+                    setFavoritos(initialFavoritos);
+                } catch (error) {
+                    console.error('Error cargando favoritos:', error);
+                }
+            }
+        };
+        loadFavoritos();
+    }, [user]);
+
+    useEffect(() => {
+        if (favoritosMessage) {
+            const timer = setTimeout(() => {
+                setFavoritosMessage("");
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [favoritosMessage]);
+
     const applyFilters = () => {
         fetch('http://localhost/Trendify/backend/getProducto.php') // Fetch products again from backend
             .then(response => {
@@ -78,6 +137,42 @@ const ProductosHombre = () => {
                 }
             })
             .catch(error => console.error('Error fetching products for filtering:', error));
+    };
+
+    const handleToggleFavoritos = async (e, producto) => {
+        e.stopPropagation();
+
+        if (!user?.id) {
+            setFavoritosMessage("Debes iniciar sesión para gestionar favoritos.");
+            return;
+        }
+
+        const isFavorito = favoritos[producto.idProducto];
+        const endpoint = isFavorito ? 'deleteFavoritos.php' : 'addFavoritos.php';
+
+        try {
+            const response = await fetch(`http://localhost/Trendify/backend/${endpoint}`, {
+                method: isFavorito ? 'DELETE' : 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idUsuario: user.id, idProducto: producto.idProducto }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) throw new Error(data.error || "Error en la operación");
+
+            setFavoritos(prev => ({
+                ...prev,
+                [producto.idProducto]: !isFavorito
+            }));
+
+            setFavoritosMessage(isFavorito
+                ? "Producto eliminado de favoritos"
+                : "Producto agregado a favoritos");
+
+        } catch (error) {
+            setFavoritosMessage(error.message || "Error al procesar la solicitud");
+        }
     };
 
     return (
@@ -170,31 +265,51 @@ const ProductosHombre = () => {
                             </aside>
                             <section className="col-span-3 grid grid-cols-3 gap-4">
                                 {Array.from(new Map(productos.map(producto => [producto.idProducto, producto])).values()).map(producto => {
-                                    const isFavorito = favoritos[producto.idProducto] || false; // Check if product is a favorite
+                                    const isFavorito = favoritos[producto.idProducto] || false;
 
                                     return (
-                                        <a href="../verProducto/verProducto.html" key={producto.idProducto}>
-                                            <div className="product-card hover:shadow-lg transform hover:scale-105 transition-all p-4 rounded-lg relative"> {/* Added relative for positioning */}
-                                                <button
-                                                    className={`absolute top-2 right-5 text-5xl ${isFavorito ? 'text-red-500' : 'text-gray-400'}`} // Adjusted right to 4
-                                                    onClick={(e) => {
-                                                        e.preventDefault(); // Prevent navigation on click
-                                                        setFavoritos(prev => ({
-                                                            ...prev,
-                                                            [producto.idProducto]: !isFavorito, // Toggle favorite state
-                                                        }));
-                                                    }}
-                                                >
-                                                    ♥
-                                                </button>
-                                                <img src={producto.url_imagen} alt={producto.nombre_producto} className="w-full h-55 object-contain rounded-lg" /> {/* Added rounded corners */}
-                                                <h2 className="text-sm font-[Montserrat] font-bold mt-2">{producto.nombre_producto}</h2> {/* Updated font to Montserrat */}
-                                                <span className="text-gray-700 text-sm font-[Montserrat]">${producto.precio}</span> {/* Updated font to Montserrat */}
+                                        <div
+                                            key={producto.idProducto}
+                                            onClick={() => navigate('/producto', { state: { producto, user, isLoggedIn: !!user } })}
+                                            className="product-card hover:shadow-lg transform hover:scale-105 transition-all p-4 rounded-lg relative cursor-pointer"
+                                        >
+                                            <button
+                                                className={`absolute top-2 right-5 text-5xl ${isFavorito ? 'text-red-500' : 'text-gray-400'}`}
+                                                onClick={(e) => handleToggleFavoritos(e, producto)}
+                                            >
+                                                ♥
+                                            </button>
+                                            <img src={producto.url_imagen} alt={producto.nombre_producto} className="w-full h-55 object-contain rounded-lg" />
+
+                                            {/* Sección de calificación */}
+                                            <div className="flex items-center gap-1 mt-2">
+                                                <div className="flex">
+                                                    {[1, 2, 3, 4, 5].map((star) => (
+                                                        <i
+                                                            key={star}
+                                                            className={`fas fa-star text-sm ${star <= Math.round(ratings[producto.idProducto]?.promedio || 0)
+                                                                    ? 'text-yellow-400'
+                                                                    : 'text-gray-300'
+                                                                }`}
+                                                        ></i>
+                                                    ))}
+                                                </div>
+                                                <span className="text-gray-600 text-xs font-[Montserrat]">
+                                                    ({ratings[producto.idProducto]?.reseñas || 0})
+                                                </span>
                                             </div>
-                                        </a>
+
+                                            <h2 className="text-sm font-[Montserrat] font-bold mt-2">{producto.nombre_producto}</h2>
+                                            <span className="text-gray-700 text-sm font-[Montserrat]">${producto.precio}</span>
+                                        </div>
                                     );
                                 })}
                             </section>
+                            {favoritosMessage && (
+                                <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-green-100 text-green-800 px-6 py-3 rounded-lg font-[Montserrat] animate-fade-in">
+                                    {favoritosMessage}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </main>

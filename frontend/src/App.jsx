@@ -4,6 +4,10 @@ import Registro from "./Registro";
 import Inicio from "./Inicio"; // Import Inicio
 import DatosUsuario from "./DatosUsuario"; // Import DatosUsuario
 import ProductosHombre from "./ProductosHombre";
+import Producto from "./VerProducto"; // Import Producto
+import Favoritos from "./Favoritos";
+import Carrito from "./Carrito"; // Import Carrito
+
 
 function App() {
   return (
@@ -14,6 +18,9 @@ function App() {
       <Route path="/mis-datos" element={<DatosUsuario />} /> 
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/hombre" element={<ProductosHombre />} /> 
+      <Route path="/producto" element={<Producto />} /> 
+      <Route path="/favoritos" element={<Favoritos />} />
+      <Route path="/carrito" element={<Carrito />} />
     </Routes>
   );
 }

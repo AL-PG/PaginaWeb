@@ -4,8 +4,8 @@ import { TbLetterX } from "react-icons/tb"; // Import X icon
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1E1E1E] w-full py-5 text-white relative mt-auto">
-      <div className="flex justify-between px-10"> {/* Changed to flex with justify-between */}
+    <footer className="bg-[#1E1E1E] w-full py-5 text-white relative mt-auto font-montserrat"> {/* Added font-montserrat */}
+      <div className="flex justify-between px-10">
         <div className="space-y-2">
           <div className="flex items-center">
             <FaPhone size={24} className="mr-2" />
