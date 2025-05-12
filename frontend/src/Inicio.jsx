@@ -6,13 +6,14 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { FaArrowRight } from 'react-icons/fa';
 
 const Inicio = () => {
-  const location = useLocation(); // Get state from navigation
-  const user = location.state?.user; // Safely access user data
-  const isLoggedIn = location.state?.isLoggedIn || false; // Safely access login state
-
+  const location = useLocation(); 
+  const user = location.state?.user; 
+  const isLoggedIn = location.state?.isLoggedIn || false;
+  
+  console.log("User data:", user);
   return (
     <div>
-      <Header isLoggedIn={isLoggedIn} user={user} /> {/* Pass login state and user info to Header */}
+        <Header isLoggedIn={!!user} user={user} />
 
       <main>
         <section className="bg-[#1E1E1E] w-full">
@@ -21,16 +22,22 @@ const Inicio = () => {
             <div className="absolute top-[50vh] left-[35vw] w-[300px] h-[300px] rounded-full bg-white filter blur-[30rem]"></div>
             <div className="grid grid-cols-3">
               <div className="m-[0%_10%] text-white">
-                <h2 className='font-[Gabarito] text-[4.5rem] m-0'>Nuevo</h2>
-                <h2 className='font-[Gabarito] justify-self-center text-[4.5rem] m-0 text-black'
-                  style={{ 
-                    textShadow: `
-                        -1px -1px 0 white,  
-                        1px -1px 0 white,  
-                        -1px  1px 0 white,  
-                        1px  1px 0 white`}}>
-                    Modelo</h2>
-                <p className='text-[1.2rem]'>
+              <div className="flex items-center space-x-2">
+  <h2 className="font-[Gabarito] text-[4.5rem] m-0">Nuevo</h2>
+  <h2
+    className="font-[Gabarito] justify-self-center text-[4.5rem] m-0 text-black"
+    style={{ 
+      textShadow: `
+        -1px -1px 0 white,  
+        1px -1px 0 white,  
+        -1px  1px 0 white,  
+        1px  1px 0 white`
+    }}
+  >
+    Modelo
+  </h2>
+</div>
+                <p className='text-[1 rem] font-[Montserrat]'>
                   Descubre nuestra nueva chamarra, diseñada para combinar estilo, comodidad y funcionalidad. 
                   Fabricada con materiales de alta calidad, ofrece la protección ideal contra el frío sin sacrificar ligereza y movilidad.
                 </p>
@@ -45,7 +52,7 @@ const Inicio = () => {
                     <img src="./img/chaqueta-port.png" alt="chaqueta de TRENDIFY"className='w-[70%]'/>
                   </a>
                 </div>
-                <span className='text-white text-[1.2rem]'>¡Cómprala ahora!</span>
+                <span className='text-white text-[1.2rem] font-[Montserrat]'>¡Cómprala ahora!</span>
               </div>
             </div>
           </div>
@@ -120,7 +127,7 @@ const Inicio = () => {
               <a href="#">
                 <img src="./img/camisa2.svg" alt="Camiseta Y2K para hombre" className='w-full bg-[#D9D9D9] rounded-[40px] overflow-hidden'/>
               </a>
-              <p className='font-bold uppercase'>Camiseta Y2K para hombre</p>
+              <p className='font-bold uppercase font-[Montserrat]'>Camiseta Y2K para hombre</p>
               <p>$199.00</p>
             </div>
 
@@ -128,7 +135,7 @@ const Inicio = () => {
               <a href="#">
                 <img src="./img/Chamarra.svg" alt="Chamarra para hombre" className='w-full bg-[#D9D9D9] rounded-[40px] overflow-hidden'/>
               </a>
-              <p className='font-bold uppercase'>Chamarra para hombre</p>
+              <p className='font-bold uppercase font-[Montserrat]'>Chamarra para hombre</p>
               <p>$199.00</p>
             </div>
 
@@ -136,7 +143,7 @@ const Inicio = () => {
               <a href="#">
                 <img src="./img/camisa1.svg" alt="Camiseta Y2K para hombre" className='w-full bg-[#D9D9D9] rounded-[40px] overflow-hidden'/>
               </a>
-              <p className='font-bold uppercase'>Camiseta Y2K para hombre</p>
+              <p className='font-bold uppercase font-[Montserrat]'>Camiseta Y2K para hombre</p>
               <p>$199.00</p>
             </div>
           </div>
@@ -148,12 +155,12 @@ const Inicio = () => {
           <div className="flex flex-col items-center justify-center absolute top-0 left-1/2 w-1/2 h-full bg-[rgba(185,185,185,0.2)] backdrop-blur-md">
             <h1 className='uppercase text-center font-black text-white text-7xl mb-10 pr-12 pl-12'>Sobre nosotros</h1>
             <div className="flex flex-col text-center text-white mx-10 gap-5">
-            <p className='text-justify font-medium text-2xl m-0 pr-10 pl-10'>En Trendify la moda es más que ropa: es una forma de expresión. Nacimos con la misión de ofrecer tendencias frescas, 
+            <p className='text-justify font-medium text-xl m-0 pr-10 pl-10 font-[Montserrat]'>En Trendify la moda es más que ropa: es una forma de expresión. Nacimos con la misión de ofrecer tendencias frescas, 
             auténticas y accesibles para jóvenes que quieren destacar con su propio estilo. </p>
-            <p className='text-justify font-medium text-2xl m-0 pr-10 pl-10'>Nos inspiramos en la cultura urbana, las últimas tendencias globales y el espíritu libre de nuestra generación. 
+            <p className='text-justify font-medium text-xl m-0 pr-10 pl-10 font-[Montserrat]'>Nos inspiramos en la cultura urbana, las últimas tendencias globales y el espíritu libre de nuestra generación. 
             Cada prenda en nuestra tienda está cuidadosamente seleccionada para que puedas combinar comodidad, actitud y originalidad en cada outfit.
             Creemos en la moda sin reglas, en la creatividad sin límites y en la libertad de ser quien quieras ser.</p>    
-            <p className='text-justify font-medium text-2xl m-0 pr-10 pl-10'>Ya sea que busques un look casual, streetwear o algo más atrevido, aquí encontrarás las piezas perfectas para hacerlo realidad.</p>
+            <p className='text-justify font-medium text-xl m-0 pr-10 pl-10 font-[Montserrat]'>Ya sea que busques un look casual, streetwear o algo más atrevido, aquí encontrarás las piezas perfectas para hacerlo realidad.</p>
             </div>
           </div>
         </section>
@@ -164,5 +171,7 @@ const Inicio = () => {
     </div>
   );
 };
+
+
 
 export default Inicio;

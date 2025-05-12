@@ -3,6 +3,10 @@ import Header from './Componentes/Header';
 import Footer from './Componentes/Footer';
 import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
 import '@fortawesome/fontawesome-free/css/all.min.css'; // Añade esta línea al principio
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
+import { motion } from 'framer-motion';
 
 const ProductosHombre = () => {
     const [productos, setProductos] = useState([]);
@@ -182,56 +186,140 @@ const ProductosHombre = () => {
                 <img src="/img/header-producto.svg" alt="Header Producto" className="w-full" /> {/* Full-width image */}
                 <main className="bg-white relative mt-[-100px] rounded-2xl w-4/5 mx-auto z-10"> {/* Further adjusted container position */}
                     <div className="px-5 py-4">
-                        <div className="flex flex-row items-center justify-between">
-                            <h1 className="text-2xl uppercase font-bold text-gray-900 font-konkhmer-sleokchher">Productos para hombre</h1>
-                            <div className="w-2/5">
-                                <input
-                                    type="text"
-                                    placeholder="Buscar productos"
-                                    className="w-3/5 p-2 rounded-full border bg-gray-200 outline-none font-[Montserrat]"
-                                    value={searchTerm} // Bind input to searchTerm state
-                                    onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm on input change
-                                />
-                                <button
-                                    className="w-1/4 ml-4 rounded-full bg-gray-900 text-white h-10 font-[Montserrat] font-bold hover:bg-gray-700"
-                                    onClick={() => {
-                                        const filteredProductos = productos.filter(producto =>
-                                            producto.nombre_producto.toLowerCase().includes(searchTerm.toLowerCase())
-                                        );
-                                        setProductos(filteredProductos); // Update productos with filtered results
-                                    }}
-                                >
-                                    Buscar
-                                </button>
+                        <div className="px-5 py-4">
+                            {/* Título y selector de ordenación */}
+                            <div className="flex flex-row items-center justify-between">
+                                <h1 className="text-2xl uppercase font-bold text-gray-900 font-konkhmer-sleokchher">Productos para hombre</h1>
+
+                                <div className="flex items-center gap-2">
+                                    <span className="text-sm font-montserrat">Ordenar por:</span>
+                                   <select 
+  className="text-sm font-montserrat border-0 bg-gray-100 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#D99D6C]"
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            let sortedProducts = [...productos];
+
+                                            switch (value) {
+                                                case 'precio-asc':
+                                                    sortedProducts.sort((a, b) => a.precio - b.precio);
+                                                    break;
+                                                case 'precio-desc':
+                                                    sortedProducts.sort((a, b) => b.precio - a.precio);
+                                                    break;
+                                                case 'calificacion':
+                                                    sortedProducts.sort((a, b) => (ratings[b.idProducto]?.promedio || 0) - (ratings[a.idProducto]?.promedio || 0));
+                                                    break;
+                                                default: // 'novedad'
+                                                    // Mantener el orden original (por defecto)
+                                                    break;
+                                            }
+
+                                            setProductos(sortedProducts);
+                                        }}
+                                    >
+                                        <option value="novedad">Novedad</option>
+                                        <option value="precio-asc">Precio: menor a mayor</option>
+                                        <option value="precio-desc">Precio: mayor a menor</option>
+                                        <option value="calificacion">Mejor calificados</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div className="grid grid-cols-4 gap-4 mt-4">
                             <aside className="bg-gray-100 rounded-lg p-4 font-montserrat"> {/* Changed background to light gray */}
                                 <h2 className="text-lg mb-4 font-konkhmer-sleokchher">Filtrar Productos</h2>
-                                <label htmlFor="categoria" className="block font-bold mb-2">Categoría:</label>
-                                <select
-                                    id="categoria"
-                                    className="w-full p-2 mb-4"
-                                    value={selectedCategoria} // Bind to selectedCategoria state
-                                    onChange={(e) => setSelectedCategoria(e.target.value)} // Update selectedCategoria on change
-                                >
-                                    <option value="">Todas</option>
-                                    {categorias.map(categoria => (
-                                        <option key={categoria} value={categoria}>{categoria}</option>
-                                    ))}
-                                </select>
-                                <label htmlFor="color" className="block font-bold mb-2">Color:</label>
-                                <select
-                                    id="color"
-                                    className="w-full p-2 mb-4"
-                                    value={selectedColor} // Bind to selectedColor state
-                                    onChange={(e) => setSelectedColor(e.target.value)} // Update selectedColor on change
-                                >
-                                    <option value="">Todos</option>
-                                    {colores.map(color => (
-                                        <option key={color} value={color}>{color}</option>
-                                    ))}
-                                </select>
+                                <div className="mb-4">
+                                    <label className="block font-bold mb-2">Categorías:</label>
+                                    <div className="flex flex-col gap-2">
+                                        {/* Botón "Todas" */}
+                                        <motion.button
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            className={`flex justify-between items-center w-full px-4 py-3 rounded-full text-sm font-montserrat transition-all ${selectedCategoria === ""
+                                                ? 'bg-gray-300 border-2 border-black'
+                                                : 'bg-gray-200 hover:bg-gray-300'
+                                                }`}
+                                            onClick={() => setSelectedCategoria("")}
+                                        >
+                                            <span>Todas</span>
+                                            <span className="bg-gray-400 text-white text-xs rounded-full px-2 py-1">
+                                                {productos.length}
+                                            </span>
+                                        </motion.button>
+
+                                        {/* Botones por categoría */}
+                                        {categorias.map(categoria => {
+                                            const count = productos.filter(p => p.tipo_producto === categoria).length;
+                                            return (
+                                                <motion.button
+                                                    key={categoria}
+                                                    whileHover={{ scale: 1.02 }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                    className={`flex justify-between items-center w-full px-4 py-3 rounded-full text-sm font-montserrat transition-all ${selectedCategoria === categoria
+                                                        ? 'bg-gray-300 border-2 border-black'
+                                                        : 'bg-gray-200 hover:bg-gray-300'
+                                                        }`}
+                                                    onClick={() => setSelectedCategoria(categoria)}
+                                                >
+                                                    <span>{categoria}</span>
+                                                    <span className="bg-gray-400 text-white text-xs rounded-full px-2 py-1">
+                                                        {count}
+                                                    </span>
+                                                </motion.button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                                <div className="mb-6">
+                                    <label className="block font-bold mb-3 text-sm font-montserrat">COLORES</label>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        {/* Opción "Todos" */}
+                                        <div
+                                            className="flex flex-col items-center cursor-pointer"
+                                            onClick={() => setSelectedColor("")}
+                                        >
+                                            <div className={`w-12 h-12 rounded-full mb-2 flex items-center justify-center border-2 ${selectedColor === "" ? 'border-black' : 'border-gray-300'}`}>
+                                                <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+                                            </div>
+                                            <span className="text-xs font-montserrat">Todos</span>
+                                            <span className="text-xs font-montserrat text-gray-500">({productos.length})</span>
+                                        </div>
+
+                                        {/* Opciones de color */}
+                                        {colores.map(color => {
+                                            const count = productos.filter(p => p.color === color).length;
+                                            const colorMap = {
+                                                'rojo': 'bg-red-500',
+                                                'azul': 'bg-blue-500',
+                                                'verde': 'bg-green-500',
+                                                'negro': 'bg-black',
+                                                'blanco': 'bg-white border border-gray-300',
+                                                'amarillo': 'bg-yellow-400',
+                                                'gris': 'bg-gray-400',
+                                                'rosa': 'bg-pink-400',
+                                                'morado': 'bg-purple-500',
+                                                'naranja': 'bg-orange-400',
+                                                // Agrega más según necesites
+                                            };
+
+                                            const bgColor = colorMap[color.toLowerCase()] || 'bg-gray-200';
+
+                                            return (
+                                                <div
+                                                    key={color}
+                                                    className="flex flex-col items-center cursor-pointer"
+                                                    onClick={() => setSelectedColor(color)}
+                                                >
+                                                    <div className={`w-12 h-12 rounded-full mb-2 flex items-center justify-center border-2 ${selectedColor === color ? 'border-black' : 'border-gray-300'}`}>
+                                                        <div className={`w-10 h-10 rounded-full ${bgColor} ${color.toLowerCase() === 'blanco' ? 'border border-gray-300' : ''}`}></div>
+                                                    </div>
+                                                    <span className="text-xs font-montserrat capitalize">{color.toLowerCase()}</span>
+                                                    <span className="text-xs font-montserrat text-gray-500">({count})</span>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
                                 <label htmlFor="precio" className="block font-bold mb-2">Rango de Precio:</label>
                                 <div className="flex items-center justify-between mb-4">
                                     <span className="text-sm font-bold">${minPrecio}</span> {/* Minimum price label */}
@@ -271,13 +359,19 @@ const ProductosHombre = () => {
                                         <div
                                             key={producto.idProducto}
                                             onClick={() => navigate('/producto', { state: { producto, user, isLoggedIn: !!user } })}
-                                            className="product-card hover:shadow-lg transform hover:scale-105 transition-all p-4 rounded-lg relative cursor-pointer"
+                                            className="product-card hover:shadow-lg transform hover:scale-105 transition-all p-4 rounded-lg relative cursor-pointer group"
                                         >
+                                            {/* Botón de favoritos con FontAwesomeIcon */}
                                             <button
-                                                className={`absolute top-2 right-5 text-5xl ${isFavorito ? 'text-red-500' : 'text-gray-400'}`}
+                                                className={`absolute top-3 right-3 p-2 rounded-full transition-all ${isFavorito ? 'bg-red-500 text-white' : 'bg-black/30 text-white group-hover:bg-black/50'
+                                                    }`}
                                                 onClick={(e) => handleToggleFavoritos(e, producto)}
+                                                aria-label={isFavorito ? "Quitar de favoritos" : "Agregar a favoritos"}
                                             >
-                                                ♥
+                                                <FontAwesomeIcon
+                                                    icon={isFavorito ? fasHeart : farHeart}
+                                                    className={isFavorito ? "text-white" : ""}
+                                                />
                                             </button>
                                             <img src={producto.url_imagen} alt={producto.nombre_producto} className="w-full h-55 object-contain rounded-lg" />
 
@@ -288,8 +382,8 @@ const ProductosHombre = () => {
                                                         <i
                                                             key={star}
                                                             className={`fas fa-star text-sm ${star <= Math.round(ratings[producto.idProducto]?.promedio || 0)
-                                                                    ? 'text-yellow-400'
-                                                                    : 'text-gray-300'
+                                                                ? 'text-yellow-400'
+                                                                : 'text-gray-300'
                                                                 }`}
                                                         ></i>
                                                     ))}
