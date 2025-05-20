@@ -31,7 +31,7 @@ if ($data === null) {
     exit;
 }
 
-if (!isset($data['calle'], $data['numero'], $data['colonia'], $data['ciudad'], $data['estado'], $data['cp'], $data['id_usuario'])) {
+if (!isset($data['calle'], $data['numero_ext'], $data['colonia'], $data['ciudad'], $data['estado'], $data['cp'], $data['id_usuario'])) {
     http_response_code(400);
     echo json_encode(["error" => "Faltan campos obligatorios"]);
     exit;
@@ -39,7 +39,7 @@ if (!isset($data['calle'], $data['numero'], $data['colonia'], $data['ciudad'], $
 
 // 6. Sanitize input
 $calle = $conn->real_escape_string($data['calle']);
-$numero = $conn->real_escape_string($data['numero']);
+$numero_ext = $conn->real_escape_string($data['numero_ext']);
 $colonia = $conn->real_escape_string($data['colonia']);
 $ciudad = $conn->real_escape_string($data['ciudad']);
 $estado = $conn->real_escape_string($data['estado']);
@@ -48,8 +48,8 @@ $id_usuario = (int) $data['id_usuario'];
 
 // 7. Insert query
 $sql = "
-    INSERT INTO direccion (calle, numero, colonia, ciudad, estado, cp, id_usuario)
-    VALUES ('$calle', '$numero', '$colonia', '$ciudad', '$estado', '$cp', $id_usuario)
+    INSERT INTO direccion (calle, numero_ext, colonia, ciudad, estado, cp, id_usuario)
+    VALUES ('$calle', '$numero_ext', '$colonia', '$ciudad', '$estado', '$cp', $id_usuario)
 ";
 
 if ($conn->query($sql)) {

@@ -2,12 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { MessageSquare, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const chatEndRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleChat = () => setIsOpen(!isOpen);
 
@@ -24,33 +26,33 @@ const Chatbot = () => {
   }, [isOpen, messages.length]);
 
   const sendMessage = async () => {
-  if (!input.trim()) return;
+    if (!input.trim()) return;
 
-  const userMessage = { from: 'user', text: input.trim() };
-  setMessages((prev) => [...prev, userMessage]);
-  setInput('');
+    const userMessage = { from: 'user', text: input.trim() };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput('');
 
-  try {
-    const res = await axios.post('http://localhost/Trendify/backend/chat.php', { message: userMessage.text });
+    try {
+      const res = await axios.post('http://localhost/Trendify/backend/chat.php', { message: userMessage.text });
 
-    // 🔥 Aquí imprimes los mensajes debug del backend
-    console.log('Respuesta completa del backend:', res.data);
-console.log('DEBUG backend:', res.data.debug);
+      // 🔥 Aquí imprimes los mensajes debug del backend
+      console.log('Respuesta completa del backend:', res.data);
+      console.log('DEBUG backend:', res.data.debug);
 
-    const botMessage = {
-      from: 'bot',
-      text: res.data.response,
-      productos: res.data.productos || []
-    };
-    setMessages((prev) => [...prev, botMessage]);
-  } catch (error) {
-    console.error('Error en la petición:', error);
-    setMessages((prev) => [
-      ...prev,
-      { from: 'bot', text: 'Error de conexión, intenta más tarde.' }
-    ]);
-  }
-};
+      const botMessage = {
+        from: 'bot',
+        text: res.data.response,
+        productos: res.data.productos || []
+      };
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error en la petición:', error);
+      setMessages((prev) => [
+        ...prev,
+        { from: 'bot', text: 'Error de conexión, intenta más tarde.' }
+      ]);
+    }
+  };
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -87,7 +89,11 @@ console.log('DEBUG backend:', res.data.debug);
                 {msg.productos && (
                   <div className="grid grid-cols-3 gap-2 mt-2">
                     {msg.productos.map((p, i) => (
-                      <div key={i} className="bg-white border rounded-lg p-1 text-center">
+                      <div
+                        key={i}
+                        className="bg-white border rounded-lg p-1 text-center cursor-pointer"
+                        onClick={() => navigate('/producto', { state: { producto: p } })}
+                      >
                         <img
                           src={p.url_imagen}
                           alt={p.nombre_producto}

@@ -24,16 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idUsuario = intval($data['idUsuario']);
     $idProducto = intval($data['idProducto']);
     $cantidad = isset($data['cantidad']) ? intval($data['cantidad']) : 1;
+    $idTalla = isset($data['idTalla']) ? intval($data['idTalla']) : null;
 
     $conn = getDatabaseConnection();
 
     // Intenta actualizar si ya existe, sino inserta nuevo
     $stmt = $conn->prepare("
-        INSERT INTO Carrito (idUsuario, idProducto, cantidad) 
-        VALUES (?, ?, ?)
+        INSERT INTO Carrito (idUsuario, idProducto, cantidad, id_Talla) 
+        VALUES (?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE cantidad = cantidad + VALUES(cantidad)
     ");
-    $stmt->bind_param("iii", $idUsuario, $idProducto, $cantidad);
+    $stmt->bind_param("iiii", $idUsuario, $idProducto, $cantidad, $idTalla);
 
     try {
         $stmt->execute();

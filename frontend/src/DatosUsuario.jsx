@@ -17,7 +17,8 @@ const DatosUsuario = () => {
   const [showModal, setShowModal] = useState(false);
   const [newAddress, setNewAddress] = useState({
     calle: "",
-    numero: "",
+    numero_ext: "",
+    numero: "", // mantener compatibilidad si ya existe
     colonia: "",
     ciudad: "",
     estado: "",
@@ -62,7 +63,11 @@ const DatosUsuario = () => {
 
   const handleAddAddress = async () => {
     try {
-      const payload = { ...newAddress, id_usuario: formData.idUsuario || formData.id };
+      const payload = {
+        ...newAddress,
+        numero_ext: newAddress.numero_ext || newAddress.numero, // preferir numero_ext
+        id_usuario: formData.idUsuario || formData.id
+      };
       const response = await fetch("http://localhost/Trendify/backend/createAddress.php", {
         method: "POST",
         headers: {
@@ -77,7 +82,8 @@ const DatosUsuario = () => {
         setShowModal(false);
         setNewAddress({
           calle: "",
-          numero: "",
+          numero_ext: "",
+          numero: "", // mantener compatibilidad si ya existe
           colonia: "",
           ciudad: "",
           estado: "",
@@ -146,7 +152,7 @@ const DatosUsuario = () => {
       <div className="flex-grow flex flex-row bg-[#e0e0e0] px-10 py-5 gap-5">
         {/* Left Section: User Data */}
         <div className="w-1/2 p-5 bg-white rounded-lg">
-          <h1 className="text-3xl font-bold my-5 font-[Konkhmer Sleokchher]">
+          <h1 className="text-3xl font-bold my-5 font-konkhmer-sleokchher">
             MIS DATOS
           </h1>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -249,7 +255,7 @@ const DatosUsuario = () => {
             />
             <button
               type="submit"
-              className="w-full py-3 mt-10 bg-[#c08b5c] text-white rounded-full hover:bg-[#a06f4b] font-konkhmer uppercase"
+              className="w-full py-3 mt-10 bg-[#c08b5c] text-white rounded-full hover:bg-[#a06f4b] font-konkhmer-sleokchher uppercase"
             >
               Guardar Cambios
             </button>
@@ -258,14 +264,14 @@ const DatosUsuario = () => {
 
         {/* Right Section: Addresses */}
         <div className="w-1/2 p-5 bg-white rounded-lg ">
-          <h1 className="text-3xl font-bold my-5 font-[Konkhmer Sleokchher]">
+          <h1 className="text-3xl font-bold my-5 font-konkhmer-sleokchher">
             MIS DIRECCIONES
           </h1>
           <ul className="space-y-4">
             {addresses.map((address) => (
               <li key={address.idDireccion} className="border p-4 rounded-lg">
                 <p><strong>Calle:</strong> {address.calle}</p>
-                <p><strong>Número:</strong> {address.numero}</p>
+                <p><strong>Número exterior:</strong> {address.numero_ext || address.numero}</p>
                 <p><strong>Colonia:</strong> {address.colonia}</p>
                 <p><strong>Ciudad:</strong> {address.ciudad}</p>
                 <p><strong>Estado:</strong> {address.estado}</p>
@@ -275,13 +281,12 @@ const DatosUsuario = () => {
           </ul>
           <button
             onClick={() => setShowModal(true)}
-            className="mt-5 py-2 px-4 bg-[#c08b5c] text-white rounded-full hover:bg-[#a06f4b] font-konkhmer uppercase"
+            className="mt-5 py-2 px-4 bg-[#c08b5c] text-white rounded-full hover:bg-[#a06f4b] font-konkhmer-sleokchher"
           >
-            Agregar Dirección
+            AGREGAR DIRECCIÓN
           </button>
         </div>
       </div>
-
       {/* Modal for Adding Address */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -298,10 +303,10 @@ const DatosUsuario = () => {
               />
               <input
                 type="text"
-                name="numero"
-                value={newAddress.numero}
+                name="numero_ext"
+                value={newAddress.numero_ext}
                 onChange={handleAddressChange}
-                placeholder="Número"
+                placeholder="Número exterior"
                 className="w-full py-2 px-4 border rounded-full"
               />
               <input
@@ -371,14 +376,14 @@ const DatosUsuario = () => {
               <button
                 type="button"
                 onClick={handleAddAddress}
-                className="w-full py-3 bg-[#c08b5c] text-white rounded-full hover:bg-[#a06f4b] font-konkhmer uppercase"
+                className="w-full py-3 bg-[#c08b5c] text-white rounded-full hover:bg-[#a06f4b] font-konkhmer-sleokchher uppercase"
               >
                 Guardar Dirección
               </button>
               <button
                 type="button"
                 onClick={() => setShowModal(false)}
-                className="w-full py-3 mt-2 bg-gray-300 text-black rounded-full hover:bg-gray-400 font-konkhmer uppercase"
+                className="w-full py-3 mt-2 bg-gray-300 text-black rounded-full hover:bg-gray-400 font-konkhmer-sleokchher uppercase"
               >
                 Cancelar
               </button>
@@ -386,7 +391,6 @@ const DatosUsuario = () => {
           </div>
         </div>
       )}
-
       <Footer />
     </div>
   );

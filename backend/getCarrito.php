@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 c.idCarrito,
                 c.idProducto, 
                 c.cantidad,
+                c.id_talla,
                 p.nombre, 
                 p.precio, 
                 (SELECT url_imagen FROM producto_imagenes WHERE idProducto = p.idProducto LIMIT 1) AS url_imagen

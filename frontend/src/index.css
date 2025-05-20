@@ -7,6 +7,7 @@
         opacity: 0;
         transform: translate(-50%, 20px);
     }
+
     to {
         opacity: 1;
         transform: translate(-50%, 0);
@@ -15,4 +16,15 @@
 
 .animate-fade-in {
     animation: fade-in 0.3s ease-out;
+}
+
+.animate-spin-slow {
+    animation: spin 10s linear infinite;
+}
+
+.animate-pulse-scale {
+    animation: pulse-scale 2.5s ease-in-out infinite;
+}
+
+   @keyframes pulse-scale { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);}
 }

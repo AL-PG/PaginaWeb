@@ -1,5 +1,5 @@
 import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom'; // Import useLocation
 import Header from './Componentes/Header';
 import Footer from './Componentes/Footer';
@@ -28,6 +28,9 @@ const ProductPage = () => {
   const [favoritosMessage, setFavoritosMessage] = useState("");
 
   const [cartMessage, setCartMessage] = useState("");
+
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [randomProducts, setRandomProducts] = useState([]); // Para productos aleatorios
 
 
   useEffect(() => {
@@ -115,6 +118,36 @@ const ProductPage = () => {
     }
   }, [favoritosMessage]);
 
+  useEffect(() => {
+    // Obtener productos relacionados desde el backend
+    if (producto?.idProducto) {
+      fetch(`http://localhost/Trendify/backend/getProductosRelacionados.php?idProducto=${producto.idProducto}`)
+        .then(res => res.json())
+        .then(data => {
+          setRelatedProducts(data);
+          // Si no hay relacionados, obtener aleatorios
+          if (!data || data.length === 0) {
+            fetch('http://localhost/Trendify/backend/getProducto.php')
+              .then(res2 => res2.json())
+              .then(allProducts => {
+                // Filtra el producto actual y selecciona 4 aleatorios
+                const filtered = allProducts.filter(p => p.idProducto !== producto.idProducto);
+                // Mezcla y toma 4
+                for (let i = filtered.length - 1; i > 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+                }
+                setRandomProducts(filtered.slice(0, 4));
+              })
+              .catch(() => setRandomProducts([]));
+          } else {
+            setRandomProducts([]); // Limpia si hay relacionados
+          }
+        })
+        .catch(() => setRelatedProducts([]));
+    }
+  }, [producto?.idProducto]);
+
   const handleToggleFavoritos = async () => {
     if (!user?.id) {
       setFavoritosMessage("Debes iniciar sesión para gestionar favoritos.");
@@ -166,6 +199,10 @@ const ProductPage = () => {
       return;
     }
 
+    // Mapeo de tallas a idTalla
+    const sizeMapping = { XS: 1, S: 2, M: 3, L: 4, XL: 5 };
+    const idTalla = sizeMapping[selectedSize];
+
     try {
       const response = await fetch('http://localhost/Trendify/backend/addCarrito.php', {
         method: 'POST',
@@ -173,7 +210,8 @@ const ProductPage = () => {
         body: JSON.stringify({
           idUsuario: user.id,
           idProducto: producto.idProducto,
-          cantidad: quantity
+          cantidad: quantity,
+          idTalla: idTalla
         }),
       });
 
@@ -202,11 +240,32 @@ const ProductPage = () => {
 
   const sizes = ['XS', 'S', 'M', 'L', 'XL'];
 
+  const [showZoom, setShowZoom] = useState(false);
+  const [zoomBoxPos, setZoomBoxPos] = useState({ x: 0, y: 0 });
+  const [zoomBg, setZoomBg] = useState({ x: 0, y: 0 });
+  const imgRef = useRef();
+
+  const handleZoomMove = (e) => {
+    const rect = imgRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    // Tamaño de la caja de zoom
+    const boxSize = 180;
+    // Limita la caja dentro de la imagen
+    let boxX = x - boxSize / 2;
+    let boxY = y - boxSize / 2;
+    boxX = Math.max(0, Math.min(boxX, rect.width - boxSize));
+    boxY = Math.max(0, Math.min(boxY, rect.height - boxSize));
+    setZoomBoxPos({ x: boxX, y: boxY });
+    // Ajusta el fondo para el zoom (factor de zoom 2x)
+    setZoomBg({ x: boxX * 2, y: boxY * 2 });
+  };
+
   return (
     <>
       <Header isLoggedIn={isLoggedIn} user={user} />
-      <div className={`max-w-[1200px] mx-auto my-4 bg-white p-5 rounded-lg ${isModalOpen ? 'blur-sm' : ''}`}>
-        <div className="flex gap-5">
+      <div className={`max-w-[1200px] mx-auto my-10 bg-white p-10 rounded-lg ${isModalOpen ? 'blur-sm' : ''}`}> {/* Aumenta los márgenes y padding */}
+        <div className="flex gap-10"> {/* Aumenta el gap */}
           {/* Galería */}
           <div className="flex flex-col gap-3">
             {thumbnails.map((thumbnail, index) => (
@@ -224,14 +283,42 @@ const ProductPage = () => {
           </div>
 
           {/* Imagen principal */}
-          <div className="flex-1">
-            <img
-              src={mainImage}
-              alt={producto?.nombre_producto || 'Producto'}
-              className="w-[450px] rounded-xl"
-            />
+          <div className="flex-1 relative">
+            <div
+              style={{ width: "450px" }}
+              className="rounded-xl overflow-hidden"
+            >
+              <img
+                src={mainImage}
+                alt={producto?.nombre_producto || 'Producto'}
+                className="w-[450px] rounded-xl transition-transform duration-300"
+                style={{ display: "block" }}
+                onMouseEnter={e => setShowZoom(true)}
+                onMouseLeave={e => setShowZoom(false)}
+                onMouseMove={e => handleZoomMove(e)}
+                ref={imgRef}
+              />
+              {/* Zoom box */}
+              {showZoom && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: zoomBoxPos.y,
+                    left: zoomBoxPos.x,
+                    width: "180px",
+                    height: "180px",
+                    border: "2px solid #D99D6C",
+                    background: `url(${mainImage})`,
+                    backgroundSize: "900px 900px",
+                    backgroundPosition: `${-zoomBg.x}px ${-zoomBg.y}px`,
+                    pointerEvents: "none",
+                    zIndex: 10,
+                    borderRadius: "12px",
+                  }}
+                />
+              )}
+            </div>
           </div>
-
           {/* Detalles del producto */}
           <div className="flex-1 pl-5 bg-gray-100 p-5 rounded-lg"> {/* Fondo gris claro con esquinas redondeadas */}
             <div className="flex justify-between items-center mb-3">
@@ -347,20 +434,60 @@ const ProductPage = () => {
         <section className="mt-10">
           <h3 className="text-xl font-bold mb-5">Esto podría gustarte</h3>
           <div className="grid grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((item) => (
-              <div key={item} className="bg-white p-4 rounded-lg relative hover:shadow-lg transition">
-                <button className="absolute top-3 right-3 text-white bg-black/30 p-2 rounded-full">
-                  <i className="far fa-heart"></i>
-                </button>
-                <img
-                  src={`img/related${item}.webp`}
-                  alt={`Producto ${item}`}
-                  className="w-full rounded mb-3"
-                />
-                <p className="font-medium">Playera STWD</p>
-                <p className="font-bold">MXN {499 + (item * 50)}.00</p>
-              </div>
-            ))}
+            {(relatedProducts.length === 0 && randomProducts.length > 0) ? (
+              randomProducts.map((prod) => (
+                <div
+                  key={prod.idProducto}
+                  className="bg-white p-4 rounded-lg relative hover:shadow-lg transition cursor-pointer"
+                  onClick={() => window.location.href = `/producto?id=${prod.idProducto}`}
+                >
+                  <button className="absolute top-3 right-3 text-white bg-black/30 p-2 rounded-full">
+                    <i className="far fa-heart"></i>
+                  </button>
+                  <img
+                    src={prod.url_imagen}
+                    alt={prod.nombre_producto}
+                    className="w-full rounded mb-3"
+                  />
+                  <p className="font-medium">{prod.nombre_producto}</p>
+                  <p className="font-bold">MXN {prod.precio}</p>
+                </div>
+              ))
+            ) : relatedProducts.length === 0 ? (
+              [1, 2, 3, 4].map((item) => (
+                <div key={item} className="bg-white p-4 rounded-lg relative hover:shadow-lg transition">
+                  <button className="absolute top-3 right-3 text-white bg-black/30 p-2 rounded-full">
+                    <i className="far fa-heart"></i>
+                  </button>
+                  <img
+                    src={`img/related${item}.webp`}
+                    alt={`Producto ${item}`}
+                    className="w-full rounded mb-3"
+                  />
+                  <p className="font-medium">Playera STWD</p>
+                  <p className="font-bold">MXN {499 + (item * 50)}.00</p>
+                </div>
+              ))
+            ) : (
+              relatedProducts.map((prod) => (
+                <div
+                  key={prod.idProducto}
+                  className="bg-white p-4 rounded-lg relative hover:shadow-lg transition cursor-pointer"
+                  onClick={() => window.location.href = `/producto?id=${prod.idProducto}`}
+                >
+                  <button className="absolute top-3 right-3 text-white bg-black/30 p-2 rounded-full">
+                    <i className="far fa-heart"></i>
+                  </button>
+                  <img
+                    src={prod.url_imagen}
+                    alt={prod.nombre_producto}
+                    className="w-full rounded mb-3"
+                  />
+                  <p className="font-medium">{prod.nombre_producto}</p>
+                  <p className="font-bold">MXN {prod.precio}</p>
+                </div>
+              ))
+            )}
           </div>
         </section>
         {favoritosMessage && (

@@ -1,0 +1,47 @@
+[2025-05-16 03:56:32] Inicio del script insertVenta.php
+[2025-05-16 03:56:32] Datos recibidos: {"idUsuario":2,"metodo_pago_id":1}
+[2025-05-16 03:56:32] Transacción iniciada para usuario ID: 2
+[2025-05-16 03:56:32] Productos en carrito: 1
+[2025-05-16 03:56:32] Total calculado: 598
+[2025-05-16 03:56:32] Items: [{"idProducto":1,"cantidad":2,"precio":"299.00"}]
+[2025-05-16 03:56:32] Error en la transacción: Cannot add or update a child row: a foreign key constraint fails (`trendify`.`venta`, CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`metodo_pago_id`) REFERENCES `metodo_pago` (`id`))
+[2025-05-16 03:58:22] Inicio del script insertVenta.php
+[2025-05-16 03:58:22] Datos recibidos: {"idUsuario":2,"metodo_pago_id":1}
+[2025-05-16 03:58:22] Transacción iniciada para usuario ID: 2
+[2025-05-16 03:58:22] Productos en carrito: 1
+[2025-05-16 03:58:22] Total calculado: 598
+[2025-05-16 03:58:22] Items: [{"idProducto":1,"cantidad":2,"precio":"299.00"}]
+[2025-05-16 03:58:22] Venta insertada con ID: 3
+[2025-05-16 03:58:22] Detalle de venta insertado para venta ID: 3
+[2025-05-16 03:58:22] Carrito eliminado para usuario ID: 2
+[2025-05-16 03:58:22] Venta registrada exitosamente.
+[2025-05-16 04:03:46] Inicio del script insertVenta.php
+[2025-05-16 04:03:46] Datos recibidos: {"idUsuario":2,"metodo_pago_id":1,"total":3296.49}
+[2025-05-16 04:03:46] Transacción iniciada para usuario ID: 2
+[2025-05-16 04:03:46] Productos en carrito: 3
+[2025-05-16 04:03:46] Total calculado: 3197.49
+[2025-05-16 04:03:46] Items: [{"idProducto":2,"cantidad":2,"precio":"499.00"},{"idProducto":3,"cantidad":1,"precio":"1299.99"},{"idProducto":4,"cantidad":1,"precio":"899.50"}]
+[2025-05-16 04:03:46] Venta insertada con ID: 4
+[2025-05-16 04:03:46] Detalle de venta insertado para venta ID: 4
+[2025-05-16 04:03:46] Carrito eliminado para usuario ID: 2
+[2025-05-16 04:03:46] Venta registrada exitosamente.
+[2025-05-16 08:12:05] Inicio del script insertVenta.php
+[2025-05-16 08:12:05] Datos recibidos: {"idUsuario":2,"metodo_pago_id":1,"total":598}
+[2025-05-16 08:12:05] Transacción iniciada para usuario ID: 2
+[2025-05-16 08:12:05] Productos en carrito: 1
+[2025-05-16 08:12:05] Total calculado (incluyendo envío): 598
+[2025-05-16 08:12:05] Items: [{"idProducto":2,"cantidad":1,"precio":"499.00"}]
+[2025-05-16 08:12:05] Venta insertada con ID: 5
+[2025-05-16 08:12:05] Detalle de venta insertado para venta ID: 5
+[2025-05-16 08:12:05] Carrito eliminado para usuario ID: 2
+[2025-05-16 08:12:05] Venta registrada exitosamente.
+[2025-05-16 08:16:01] Inicio del script insertVenta.php
+[2025-05-16 08:16:01] Datos recibidos: {"idUsuario":2,"metodo_pago_id":1,"total":1898}
+[2025-05-16 08:16:01] Transacción iniciada para usuario ID: 2
+[2025-05-16 08:16:01] Productos en carrito: 1
+[2025-05-16 08:16:01] Total calculado (incluyendo envío): 1898
+[2025-05-16 08:16:01] Items: [{"idProducto":4,"cantidad":2,"precio":"899.50"}]
+[2025-05-16 08:16:01] Venta insertada con ID: 6
+[2025-05-16 08:16:01] Detalle de venta insertado para venta ID: 6
+[2025-05-16 08:16:01] Carrito eliminado para usuario ID: 2
+[2025-05-16 08:16:01] Venta registrada exitosamente.

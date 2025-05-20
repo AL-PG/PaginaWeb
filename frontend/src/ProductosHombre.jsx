@@ -21,6 +21,7 @@ const ProductosHombre = () => {
     const navigate = useNavigate(); // Initialize navigate function
     const [favoritosMessage, setFavoritosMessage] = useState(""); // State for confirmation message
 
+    // Asegura que los estados de filtro están definidos antes de usarlos
     const [selectedCategoria, setSelectedCategoria] = useState(""); // State for selected category
     const [selectedColor, setSelectedColor] = useState(""); // State for selected color
     const [selectedPrecio, setSelectedPrecio] = useState(maxPrecio); // State for selected price range
@@ -46,7 +47,9 @@ const ProductosHombre = () => {
                     // Calculate min and max prices
                     const precios = data.map(producto => producto.precio);
                     setMinPrecio(Math.min(...precios));
-                    setMaxPrecio(Math.max(...precios));
+                    const roundedMax = Math.ceil(Math.max(...precios));
+                    setMaxPrecio(roundedMax); // max redondeado hacia arriba
+                    setSelectedPrecio(roundedMax); // Asegura que el filtro por defecto muestre todo
 
                     // Extract unique categories from tipo_producto
                     const uniqueCategorias = [...new Set(data.map(producto => producto.tipo_producto))];
@@ -226,7 +229,7 @@ const ProductosHombre = () => {
                             </div>
                         </div>
                         <div className="grid grid-cols-4 gap-4 mt-4">
-                            <aside className="bg-gray-100 rounded-lg p-4 font-montserrat"> {/* Changed background to light gray */}
+                            <aside className="bg-gray-100 rounded-lg p-4 font-montserrat">
                                 <h2 className="text-lg mb-4 font-konkhmer-sleokchher">Filtrar Productos</h2>
                                 <div className="mb-4">
                                     <label className="block font-bold mb-2">Categorías:</label>
@@ -351,53 +354,55 @@ const ProductosHombre = () => {
                                     Aplicar filtros
                                 </button>
                             </aside>
-                            <section className="col-span-3 grid grid-cols-3 gap-4">
-                                {Array.from(new Map(productos.map(producto => [producto.idProducto, producto])).values()).map(producto => {
-                                    const isFavorito = favoritos[producto.idProducto] || false;
+                            <section className="col-span-3">
+                                <div className="grid grid-cols-4 gap-4">
+                                    {Array.from(new Map(productos.map(producto => [producto.idProducto, producto])).values()).map(producto => {
+                                        const isFavorito = favoritos[producto.idProducto] || false;
 
-                                    return (
-                                        <div
-                                            key={producto.idProducto}
-                                            onClick={() => navigate('/producto', { state: { producto, user, isLoggedIn: !!user } })}
-                                            className="product-card hover:shadow-lg transform hover:scale-105 transition-all p-4 rounded-lg relative cursor-pointer group"
-                                        >
-                                            {/* Botón de favoritos con FontAwesomeIcon */}
-                                            <button
-                                                className={`absolute top-3 right-3 p-2 rounded-full transition-all ${isFavorito ? 'bg-red-500 text-white' : 'bg-black/30 text-white group-hover:bg-black/50'
-                                                    }`}
-                                                onClick={(e) => handleToggleFavoritos(e, producto)}
-                                                aria-label={isFavorito ? "Quitar de favoritos" : "Agregar a favoritos"}
+                                        return (
+                                            <div
+                                                key={producto.idProducto}
+                                                onClick={() => navigate('/producto', { state: { producto, user, isLoggedIn: !!user } })}
+                                                className="product-card hover:shadow-lg transform hover:scale-105 transition-all p-4 rounded-lg relative cursor-pointer group h-auto"
                                             >
-                                                <FontAwesomeIcon
-                                                    icon={isFavorito ? fasHeart : farHeart}
-                                                    className={isFavorito ? "text-white" : ""}
-                                                />
-                                            </button>
-                                            <img src={producto.url_imagen} alt={producto.nombre_producto} className="w-full h-55 object-contain rounded-lg" />
+                                                {/* Botón de favoritos con FontAwesomeIcon */}
+                                                <button
+                                                    className={`absolute top-3 right-3 p-2 rounded-full transition-all ${isFavorito ? 'bg-red-500 text-white' : 'bg-black/30 text-white group-hover:bg-black/50'
+                                                        }`}
+                                                    onClick={(e) => handleToggleFavoritos(e, producto)}
+                                                    aria-label={isFavorito ? "Quitar de favoritos" : "Agregar a favoritos"}
+                                                >
+                                                    <FontAwesomeIcon
+                                                        icon={isFavorito ? fasHeart : farHeart}
+                                                        className={isFavorito ? "text-white" : ""}
+                                                    />
+                                                </button>
+                                                <img src={producto.url_imagen} alt={producto.nombre_producto} className="w-full h-55 object-contain rounded-lg" />
 
-                                            {/* Sección de calificación */}
-                                            <div className="flex items-center gap-1 mt-2">
-                                                <div className="flex">
-                                                    {[1, 2, 3, 4, 5].map((star) => (
-                                                        <i
-                                                            key={star}
-                                                            className={`fas fa-star text-sm ${star <= Math.round(ratings[producto.idProducto]?.promedio || 0)
-                                                                ? 'text-yellow-400'
-                                                                : 'text-gray-300'
-                                                                }`}
-                                                        ></i>
-                                                    ))}
+                                                {/* Sección de calificación */}
+                                                <div className="flex items-center gap-1 mt-2">
+                                                    <div className="flex">
+                                                        {[1, 2, 3, 4, 5].map((star) => (
+                                                            <i
+                                                                key={star}
+                                                                className={`fas fa-star text-sm ${star <= Math.round(ratings[producto.idProducto]?.promedio || 0)
+                                                                    ? 'text-yellow-400'
+                                                                    : 'text-gray-300'
+                                                                    }`}
+                                                            ></i>
+                                                        ))}
+                                                    </div>
+                                                    <span className="text-gray-600 text-xs font-[Montserrat]">
+                                                        ({ratings[producto.idProducto]?.reseñas || 0})
+                                                    </span>
                                                 </div>
-                                                <span className="text-gray-600 text-xs font-[Montserrat]">
-                                                    ({ratings[producto.idProducto]?.reseñas || 0})
-                                                </span>
-                                            </div>
 
-                                            <h2 className="text-sm font-[Montserrat] font-bold mt-2">{producto.nombre_producto}</h2>
-                                            <span className="text-gray-700 text-sm font-[Montserrat]">${producto.precio}</span>
-                                        </div>
-                                    );
-                                })}
+                                                <h2 className="text-sm font-[Montserrat] font-bold mt-2">{producto.nombre_producto}</h2>
+                                                <span className="text-gray-700 text-sm font-[Montserrat]">${producto.precio}</span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </section>
                             {favoritosMessage && (
                                 <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-green-100 text-green-800 px-6 py-3 rounded-lg font-[Montserrat] animate-fade-in">

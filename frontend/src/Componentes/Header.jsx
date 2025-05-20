@@ -111,10 +111,10 @@ const Header = ({ isLoggedIn, user }) => {
               <a onClick={() => navigate("/inicio", { state: { user } })} style={{ cursor: "pointer" }}>Inicio</a>
             </li>
             <li className="mx-4 hover:bg-[#373737] px-2 py-1 rounded cursor-pointer">
-              <a onClick={() => navigate("/ofertas")} style={{ cursor: "pointer" }}>Ofertas</a>
+              <a onClick={() => navigate("/colecciones", { state: { user } })} style={{ cursor: "pointer" }}>Colecciones</a>
             </li>
             <li className="mx-4 hover:bg-[#373737] px-2 py-1 rounded cursor-pointer">
-              <a onClick={() => navigate("/mujer")} style={{ cursor: "pointer" }}>Mujer</a>
+              <a onClick={() => navigate("/mujer", { state: { user } })}style={{ cursor: "pointer" }}>Mujer</a>
             </li>
             <li className="mx-4 hover:bg-[#373737] px-2 py-1 rounded cursor-pointer">
               <a onClick={() => navigate("/hombre", { state: { user } })} style={{ cursor: "pointer" }}>Hombre</a>
