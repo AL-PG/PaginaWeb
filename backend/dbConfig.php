@@ -2,9 +2,9 @@
 function getDatabaseConnection() {
     $servername = "localhost";
     $username = "root";
-    $password = "260403";
-    $dbname = "Trendify";
-    $port = 3307;
+    $password = "";
+    $dbname = "trendify";
+    $port = 3306;
 
     $conn = new mysqli($servername, $username, $password, $dbname, $port);
 

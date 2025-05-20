@@ -5,30 +5,30 @@ import { TbLetterX } from "react-icons/tb"; // Import X icon
 const Footer = () => {
   return (
     <footer className="bg-[#1E1E1E] w-full py-5 text-white relative mt-auto font-montserrat"> {/* Added font-montserrat */}
-      <div className="flex justify-between px-10">
+      <div className="flex flex-col sm:flex-row justify-between px-10">
         <div className="space-y-2">
-          <div className="flex items-center">
+          <div className="flex items-center justify-center">  
             <FaPhone size={24} className="mr-2" />
-            <span>Teléfono: 01 800 123 4567</span>
+            <span className="text-sm md:text-xl">Teléfono: 01 800 123 4567</span>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center justify-center">
             <FaEnvelope size={24} className="mr-2" />
-            <span>soporte@trendify.com.mx</span>
+            <span className="text-sm md:text-xl">soporte@trendify.com.mx</span>
           </div>
         </div>
         <div className="text-center">
-          <h2 className="text-2xl mb-3">Síguenos en:</h2>
+          <h2 className="text-sm sm:text-xl md:text-2xl mb-2">Síguenos en:</h2>
           <div className="flex justify-center items-center gap-5">
             <a href="#" className="text-white text-2xl">
               <FaFacebook />
             </a>
-            <a href="#" className="text-white text-2xl">
+            <a href="#" className="text-white md:text-2xl">
               <FaInstagram />
             </a>
-            <a href="#" className="text-white text-2xl">
+            <a href="#" className="text-white md:text-2xl">
               <TbLetterX /> {/* Replaced Twitter icon with X icon */}
             </a>
-            <a href="#" className="text-white text-2xl">
+            <a href="#" className="text-white md:text-2xl">
               <FaPinterest />
             </a>
           </div>

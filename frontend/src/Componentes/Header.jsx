@@ -94,7 +94,7 @@ const Header = ({ isLoggedIn, user }) => {
 
   return (
     <>
-      <div className="flex justify-end bg-[#D99D6C] px-5 py-1 text-xs font-montserrat">
+      <div className="justify-end bg-[#D99D6C] px-5 py-1 text-xs font-montserrat hidden md:flex">
         <a href="#" className="text-black hover:underline ml-4">Ayuda</a>
         <a href="#" className="text-black hover:underline ml-4">Pedidos y devoluciones</a>
         <a href="#" className="text-black hover:underline ml-4">Unete al club</a>
@@ -105,7 +105,7 @@ const Header = ({ isLoggedIn, user }) => {
           <img src={logo} alt="Logo" className="h-[50px] w-[50px]" />
         </div>
         
-        <nav>
+        <nav className="hidden md:flex"> 
           <ul className="flex list-none font-konkhmer-sleokchher">
             <li className="mx-4 hover:bg-[#373737] px-2 py-1 rounded cursor-pointer">
               <a onClick={() => navigate("/inicio", { state: { user } })} style={{ cursor: "pointer" }}>Inicio</a>
@@ -134,10 +134,11 @@ const Header = ({ isLoggedIn, user }) => {
               <input
                 type="text"
                 placeholder="Buscar"
-                className="bg-transparent outline-none text-white placeholder-[#bcbcbc] text-sm font-montserrat w-[150px] cursor-pointer"
+                className="bg-transparent outline-none text-white placeholder-[#bcbcbc] 
+                text-sm font-montserrat w-[150px] cursor-pointer hidden sm:block"
                 readOnly
               />
-              <FaSearch className="text-white ml-2" />
+              <FaSearch className="text-white sm:ml-2 max-sm:h-8" />
             </motion.div>
           )}
           
