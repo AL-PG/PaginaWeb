@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaSearch, FaShoppingCart, FaUser, FaHeart, FaBox, FaCreditCard, FaUserEdit, FaSignInAlt, FaUserPlus } from "react-icons/fa";
+import {
+  FaSearch, FaShoppingCart, FaUser, FaHeart,
+  FaBox, FaCreditCard, FaUserEdit, FaSignInAlt, FaUserPlus, FaBars
+} from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../public/img/logo.png";
 
@@ -12,6 +15,7 @@ const Header = ({ isLoggedIn, user }) => {
   const [activeFilter, setActiveFilter] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,19 +23,11 @@ const Header = ({ isLoggedIn, user }) => {
       fetch(`http://localhost/Trendify/backend/getCarrito.php?idUsuario=${user.id}`)
         .then(response => response.json())
         .then(data => {
-          if (Array.isArray(data)) {
-            setCartCount(data.length);
-          }
+          if (Array.isArray(data)) setCartCount(data.length);
         })
         .catch(error => console.error('Error fetching cart count:', error));
-    } else {
-      setCartCount(0);
-    }
+    } else setCartCount(0);
   }, [isLoggedIn, user]);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
@@ -40,14 +36,6 @@ const Header = ({ isLoggedIn, user }) => {
       setSearchResults([]);
       setActiveFilter(null);
     }
-  };
-
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
-
-  const handleLogoutClick = () => {
-    navigate("/inicio", { state: { isLoggedIn: false, user: null } });
   };
 
   const handleSearchSubmit = (e) => {
@@ -61,21 +49,16 @@ const Header = ({ isLoggedIn, user }) => {
       .then(response => response.json())
       .then(data => {
         let filteredProducts = data;
-        
-        // Filtrar por búsqueda
         if (searchQuery) {
-          filteredProducts = filteredProducts.filter(producto => 
+          filteredProducts = filteredProducts.filter(producto =>
             producto.nombre_producto.toLowerCase().includes(searchQuery.toLowerCase())
           );
         }
-        
-        // Filtrar por género si hay un filtro activo
         if (activeFilter) {
-          filteredProducts = filteredProducts.filter(producto => 
+          filteredProducts = filteredProducts.filter(producto =>
             producto.genero === activeFilter || producto.genero === 'Unisex'
           );
         }
-        
         setSearchResults(filteredProducts);
         setIsLoading(false);
       })
@@ -88,134 +71,99 @@ const Header = ({ isLoggedIn, user }) => {
   const handleFilterClick = (filter) => {
     const newFilter = filter === activeFilter ? null : filter;
     setActiveFilter(newFilter);
-    // Actualizamos los resultados inmediatamente cuando se cambia el filtro
     fetchSearchResults();
   };
 
+  const commonLinks = (
+    <ul className="flex flex-col md:flex-row gap-3 md:gap-8 font-konkhmer-sleokchher">
+      <li className="hover:bg-[#373737] px-2 py-1 rounded cursor-pointer" onClick={() => navigate("/inicio", { state: { user } })}>Inicio</li>
+      <li className="hover:bg-[#373737] px-2 py-1 rounded cursor-pointer" onClick={() => navigate("/colecciones", { state: { user } })}>Colecciones</li>
+      <li className="hover:bg-[#373737] px-2 py-1 rounded cursor-pointer" onClick={() => navigate("/mujer", { state: { user } })}>Mujer</li>
+      <li className="hover:bg-[#373737] px-2 py-1 rounded cursor-pointer" onClick={() => navigate("/hombre", { state: { user } })}>Hombre</li>
+    </ul>
+  );
+
   return (
     <>
-      <div className="flex justify-end bg-[#D99D6C] px-5 py-1 text-xs font-montserrat">
+      <div className="hidden md:flex justify-end bg-[#D99D6C] px-5 py-1 text-xs font-montserrat">
         <a href="#" className="text-black hover:underline ml-4">Ayuda</a>
         <a href="#" className="text-black hover:underline ml-4">Pedidos y devoluciones</a>
         <a href="#" className="text-black hover:underline ml-4">Unete al club</a>
       </div>
-      
-      <header className="flex justify-between items-center bg-[#1A1A1A] text-white px-5 py-3 sticky top-0 z-50">
-        <div className="logo" onClick={() => navigate("/inicio", { state: { user } })} style={{ cursor: "pointer" }}>
-          <img src={logo} alt="Logo" className="h-[50px] w-[50px]" />
+
+      <header className="bg-[#1A1A1A] text-white px-5 py-3 sticky top-0 z-50">
+        <div className="flex items-center justify-center"> {/* Centra el contenido del header */}
+          <div className="flex items-center gap-4">
+            <img src={logo} alt="Logo" className="h-10 w-10 cursor-pointer" onClick={() => navigate("/inicio", { state: { user } })} />
+          </div>
+          {/* Menú de navegación centrado */}
+          <div className="flex-1 flex justify-center">
+            <div className="hidden md:block">{commonLinks}</div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="md:block hidden">
+              <div className="flex items-center bg-[#313131] px-3 py-1 rounded-full cursor-pointer" onClick={toggleSearch}>
+                <input
+                  type="text"
+                  placeholder="Buscar"
+                  className="bg-transparent outline-none text-white placeholder-[#bcbcbc] text-sm font-montserrat w-[150px] cursor-pointer"
+                  readOnly
+                />
+                <FaSearch className="text-white ml-2" />
+              </div>
+            </div>
+
+            <div className="relative">
+              <FaShoppingCart className="text-lg cursor-pointer" onClick={() => navigate('/carrito', { state: { user } })} />
+              {cartCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </div>
+
+            <div className="md:block hidden relative">
+              <div onClick={() => setIsMenuOpen(!isMenuOpen)} className="cursor-pointer bg-[#313131] px-3 py-1 rounded-full border border-white flex items-center gap-2">
+                <FaUser className="text-lg" />
+                {isLoggedIn && user && <span className="text-sm font-montserrat">{user.nombreCompleto}</span>}
+              </div>
+              {isMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-[200px] bg-white text-black rounded shadow-lg font-montserrat">
+                  {isLoggedIn ? (
+                    <>
+                      <a onClick={() => navigate("/favoritos", { state: { user } })} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"><FaHeart className="mr-2" /> Favoritos</a>
+                      <a onClick={() => navigate("/mis-compras", { state: { user } })} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"><FaBox className="mr-2" /> Mis Compras</a>
+                      <a onClick={() => navigate("/mis-datos", { state: { user } })} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"><FaUserEdit className="mr-2" /> Mis Datos</a>
+                      <a onClick={() => navigate("/inicio", { state: { isLoggedIn: false, user: null } })} className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"><FaSignInAlt className="mr-2" /> Cerrar Sesión</a>
+                    </>
+                  ) : (
+                    <>
+                      <a onClick={() => navigate("/login") } className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"><FaSignInAlt className="mr-2" /> Iniciar Sesión</a>
+                      <a href="/registro" className="flex items-center px-4 py-2 hover:bg-gray-100"><FaUserPlus className="mr-2" /> Registrarse</a>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="md:hidden block">
+              <FaBars className="text-2xl cursor-pointer" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+            </div>
+          </div>
         </div>
-        
-        <nav>
-          <ul className="flex list-none font-konkhmer-sleokchher">
-            <li className="mx-4 hover:bg-[#373737] px-2 py-1 rounded cursor-pointer">
-              <a onClick={() => navigate("/inicio", { state: { user } })} style={{ cursor: "pointer" }}>Inicio</a>
-            </li>
-            <li className="mx-4 hover:bg-[#373737] px-2 py-1 rounded cursor-pointer">
-              <a onClick={() => navigate("/colecciones", { state: { user } })} style={{ cursor: "pointer" }}>Colecciones</a>
-            </li>
-            <li className="mx-4 hover:bg-[#373737] px-2 py-1 rounded cursor-pointer">
-              <a onClick={() => navigate("/mujer", { state: { user } })}style={{ cursor: "pointer" }}>Mujer</a>
-            </li>
-            <li className="mx-4 hover:bg-[#373737] px-2 py-1 rounded cursor-pointer">
-              <a onClick={() => navigate("/hombre", { state: { user } })} style={{ cursor: "pointer" }}>Hombre</a>
-            </li>
-          </ul>
-        </nav>
-        
-        <div className="flex items-center gap-4 relative">
-          {!isSearchOpen && (
-            <motion.div 
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex items-center bg-[#313131] px-3 py-1 rounded-full"
-              onClick={toggleSearch}
+
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0 }}
+              animate={{ height: "auto" }}
+              exit={{ height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden mt-3"
             >
-              <input
-                type="text"
-                placeholder="Buscar"
-                className="bg-transparent outline-none text-white placeholder-[#bcbcbc] text-sm font-montserrat w-[150px] cursor-pointer"
-                readOnly
-              />
-              <FaSearch className="text-white ml-2" />
+              <div className="flex flex-col gap-3">{commonLinks}</div>
             </motion.div>
           )}
-          
-          <div
-            className="relative flex items-center gap-2 bg-[#313131] text-white px-3 py-1 rounded-full border border-white cursor-pointer hover:bg-[#3a3a3a]"
-            onClick={toggleMenu}
-          >
-            <FaUser className="text-lg" />
-            {isLoggedIn && user && (
-              <span className="text-sm font-montserrat">{user.nombreCompleto}</span>
-            )}
-            {isMenuOpen && (
-              <div className="absolute right-0 top-full mt-2 w-[200px] bg-white text-black rounded shadow-lg font-montserrat">
-                {isLoggedIn ? (
-                  <>
-                    <a
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate("/favoritos", { state: { user } });
-                      }}
-                      className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      <FaHeart className="mr-2" /> Favoritos
-                    </a>
-                    <a
-                      onClick={() => navigate("/mis-compras", { state: { user } })}
-                      className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      <FaBox className="mr-2" /> Mis Compras
-                    </a>
-                    <a
-                      onClick={() => navigate("/metodos-pago", { state: { user } })}
-                      className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      <FaCreditCard className="mr-2" /> Métodos de Pago
-                    </a>
-                    <a
-                      onClick={() => navigate("/mis-datos", { state: { user } })}
-                      className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      <FaUserEdit className="mr-2" /> Mis Datos
-                    </a>
-                    <a
-                      onClick={handleLogoutClick}
-                      className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      <FaSignInAlt className="mr-2" /> Cerrar Sesión
-                    </a>
-                  </>
-                ) : (
-                  <>
-                    <a
-                      onClick={handleLoginClick}
-                      className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      <FaSignInAlt className="mr-2" /> Iniciar Sesión
-                    </a>
-                    <a href="/registro" className="flex items-center px-4 py-2 hover:bg-gray-100">
-                      <FaUserPlus className="mr-2" /> Registrarse
-                    </a>
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-          
-          <div className="relative">
-            <FaShoppingCart
-              className="text-lg cursor-pointer hover:text-gray-300 transition-colors"
-              onClick={() => navigate('/carrito', { state: { user } })}
-            />
-            {cartCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-montserrat rounded-full h-4 w-4 flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </div>
-        </div>
+        </AnimatePresence>
       </header>
 
       {/* Panel de búsqueda expandido */}

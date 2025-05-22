@@ -60,6 +60,33 @@ const Favoritos = () => {
         }
     };
 
+    const handleAddToCart = async (producto) => {
+        if (!user?.id) {
+            setMessage("Debes iniciar sesión para añadir productos al carrito.");
+            setTimeout(() => setMessage(''), 3000);
+            return;
+        }
+        try {
+            const response = await fetch('http://localhost/Trendify/backend/addCarrito.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    idUsuario: user.id,
+                    idProducto: producto.idProducto,
+                    cantidad: 1,
+                    idTalla: 3 // Por defecto talla M (ajusta según tu lógica)
+                }),
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Error al agregar al carrito");
+            setMessage('Producto añadido al carrito');
+            setTimeout(() => setMessage(''), 3000);
+        } catch (err) {
+            setMessage(err.message);
+            setTimeout(() => setMessage(''), 3000);
+        }
+    };
+
     return (
         <div className="bg-gray-200 min-h-screen flex flex-col">
             <Header isLoggedIn={!!user} user={user} />
@@ -121,7 +148,7 @@ const Favoritos = () => {
                                             </button>
                                             <button
                                                 className="border border-gray-400 text-gray-700 py-2 rounded-lg hover:bg-gray-100 transition-colors font-konkhmer-sleokchher text-sm md:text-base"
-                                                disabled
+                                                onClick={() => handleAddToCart(producto)}
                                             >
                                                 Agregar al Carrito
                                             </button>

@@ -301,6 +301,7 @@ const ProductosMujer = () => {
                                                 'rosa': 'bg-pink-400',
                                                 'morado': 'bg-purple-500',
                                                 'naranja': 'bg-orange-400',
+                                                'café': 'bg-amber-900', // <-- Agregado color café
                                                 // Agrega más según necesites
                                             };
 
@@ -353,10 +354,8 @@ const ProductosMujer = () => {
                                     Aplicar filtros
                                 </button>
                             </aside>
-                            <section
-                                className="col-span-3"
-                            >
-                                <div className="grid grid-cols-3 gap-4">
+                            <section className="col-span-3">
+                                <div className="grid grid-cols-4 gap-4">
                                     {Array.from(new Map(productos.map(producto => [producto.idProducto, producto])).values()).map(producto => {
                                         const isFavorito = favoritos[producto.idProducto] || false;
 

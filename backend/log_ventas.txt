@@ -45,3 +45,13 @@
 [2025-05-16 08:16:01] Detalle de venta insertado para venta ID: 6
 [2025-05-16 08:16:01] Carrito eliminado para usuario ID: 2
 [2025-05-16 08:16:01] Venta registrada exitosamente.
+[2025-05-22 09:41:30] Inicio del script insertVenta.php
+[2025-05-22 09:41:30] Datos recibidos: {"idUsuario":2,"metodo_pago_id":1,"total":598}
+[2025-05-22 09:41:30] Transacción iniciada para usuario ID: 2
+[2025-05-22 09:41:30] Productos en carrito: 1
+[2025-05-22 09:41:30] Total calculado (incluyendo envío): 598
+[2025-05-22 09:41:30] Items: [{"idProducto":12,"cantidad":1,"precio":"499.00"}]
+[2025-05-22 09:41:30] Venta insertada con ID: 7
+[2025-05-22 09:41:30] Detalle de venta insertado para venta ID: 7
+[2025-05-22 09:41:30] Carrito eliminado para usuario ID: 2
+[2025-05-22 09:41:30] Venta registrada exitosamente.
